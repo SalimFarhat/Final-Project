@@ -24,11 +24,15 @@ const Wrapper = styled.div`
     justify-content: flex-start;
     align-items: center;
     align-content: stretch;
-
+    height: 40px;
+    background-color: green;
 `
-
+const Para = styled.p`
+`
 const Link = styled(NavLink)`
-
+    margin-left: 20px;
+    text-decoration: none;
+    color: white;
 `
 
 

@@ -1,21 +1,24 @@
 // import React from "react";
-// import styled from "styled-components";
-import {Route, Switch} from "react-router";
-// import GlobalStyles from "./GlobalStyles";
+import {BrowserRouter, Routes, Route} from "react-router-dom"
+import styled from "styled-components";
+import GlobalStyles from "./GlobalStyles";
 import Header from "./Header";
 import HomePage from "./HomePage";
 import Schedule from "./Schedule";
 
 
-const App = () => {
+function App() {
 
   return (
-    <Switch>
-      <Route>
-        
-      </Route>
+    <BrowserRouter>
+    <GlobalStyles />
+    <Header />
+      <Routes>
+        <Route path="/" element={<HomePage />}/>
+        <Route path="/schedule" element={<Schedule />}/>
 
-    </Switch>
+      </Routes>
+    </BrowserRouter>
 
   );
 }
