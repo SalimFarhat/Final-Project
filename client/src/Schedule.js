@@ -8,7 +8,7 @@ const Schedule = () => {
 
     return (
         <Wrapper>
-            Hello Everyone! This is the Schedule page;
+            This is the Schedule page. Isn't it neat!
 
         </Wrapper>
     )

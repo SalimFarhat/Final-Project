@@ -1,0 +1,53 @@
+[
+    {
+        "_id": "ef229980-17b4-44e7-be4c-361dd053bf60",
+        "classType": "yoga",
+        "difficulty": "2",
+        "year": "2022",
+        "month": "June",
+        "day": "19",
+        "time": "14:00",
+        "attending": []
+    },
+    {
+        "_id": "89e9e784-0fa1-4da4-9af6-282fa440feb0",
+        "classType": "yoga",
+        "difficulty": "2",
+        "year": "2022",
+        "month": "June",
+        "day": "25",
+        "time": "17:00",
+        "attending": []
+      },
+      {
+        "_id": "d4b66345-0fd1-4a2c-936b-c2b80119f133",
+        "classType": "weights",
+        "difficulty": "2",
+        "year": "2022",
+        "month": "June",
+        "day": "28",
+        "time": "10:00",
+        "attending": []
+      },
+      {
+        "_id": "3a59b8a3-e09b-4948-8757-52abe0209f3c",
+        "classType": "cycling",
+        "difficulty": "1",
+        "year": "2022",
+        "month": "June",
+        "day": "26",
+        "time": "11:00",
+        "attending": []
+      },
+      {
+        "_id": "c6c9416f-0466-4c5b-b28c-05f335d53cb4",
+        "classType": "crossfit",
+        "difficulty": "3",
+        "year": "2022",
+        "month": "June",
+        "day": "29",
+        "time": "11:00",
+        "attending": []
+      }
+
+]

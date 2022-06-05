@@ -7,8 +7,13 @@ const Header = () => {
 
     return (
         <Wrapper>
-            <Link to="/"><FaDumbbell /></Link>
-            <Link to="/schedule">Schedule</Link>
+            <LeftLinks>
+            <Link to="/"><FaDumbbell/></Link>
+            <Link to="/schedule">Schedule classes</Link>
+            </LeftLinks>
+            <RightLinks>
+                <Link to="/login"> Sign in</Link>
+            </RightLinks>
 
         </Wrapper>
     )
@@ -17,18 +22,27 @@ const Header = () => {
 
 export default Header;
 
+
 const Wrapper = styled.div`
     display: flex;
     flex-direction: row;
     flex-wrap: nowrap;
-    justify-content: flex-start;
+    justify-content: space-between;
     align-items: center;
     align-content: stretch;
     height: 40px;
     background-color: green;
+    font-size: 24px;
 `
-const Para = styled.p`
+const LeftLinks = styled.div`
+    display: flex;
+    margin-left: 15px;
 `
+const RightLinks = styled.div`
+    display: flex;
+    margin-right: 15px;
+`
+
 const Link = styled(NavLink)`
     margin-left: 20px;
     text-decoration: none;

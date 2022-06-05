@@ -1,12 +1,29 @@
 const express = require("express");
 const morgan = require("morgan");
 
-
+const {getAllClasses} = require("./handlers/getAllClasses")
+const {getOneClass} = require("./handlers/getOneClass")
+const {getAllClients} = require("./handlers/getAllClients")
+const {getOneClient} = require("./handlers/getOneClient")
+const {makeClass} = require("./handlers/makeClass");
 
 express()
     .use(morgan("tiny"))
     .use(express.json())
     .use(express.static("public"))
+
+
+
+    .get(`/classes`, getAllClasses)
+    .get(`/class/:_id`, getOneClass)
+    .get(`/clients`, getAllClients)
+    .get(`/client/:_id`, getOneClient)
+
+    .post(`/add-class`, makeClass)
+    // .delete(``)
+
+
+
 
     .get(`/`, (req, res) => {
         res.send("Let's see what this leads me to!")
