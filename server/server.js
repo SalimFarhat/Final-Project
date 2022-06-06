@@ -6,6 +6,12 @@ const {getOneClass} = require("./handlers/getOneClass")
 const {getAllClients} = require("./handlers/getAllClients")
 const {getOneClient} = require("./handlers/getOneClient")
 const {makeClass} = require("./handlers/makeClass");
+const {makeClient} = require("./handlers/makeClient");
+const {deleteClass} = require("./handlers/deleteClass")
+const {deleteClient} = require("./handlers/deleteClient")
+const {updateClass} = require("./handlers/updateClass")
+// const {removeClient} = require("./handlers/removeClient")
+// const {joinClass} = require("./handlers/joinClass")
 
 express()
     .use(morgan("tiny"))
@@ -20,7 +26,15 @@ express()
     .get(`/client/:_id`, getOneClient)
 
     .post(`/add-class`, makeClass)
-    // .delete(``)
+    .post(`/add-client`, makeClient)
+
+    .delete(`/class/:_id`, deleteClass)
+    .delete(`/client/:_id`, deleteClient)
+    
+    .patch(`/mod-class/:_id`, updateClass)
+    // .patch(`/remove-client`,removeClient)
+
+    // .put(`/join-class`, joinClass)
 
 
 
