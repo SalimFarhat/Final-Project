@@ -11,6 +11,7 @@ import AdminEdit from "./AdminPages/AdminEdit";
 import AdminPage from "./AdminPages/AdminPage";
 import AdminRemove from "./AdminPages/AdminRemove";
 import ModifySchedule from "./ModifySchedule";
+import ErrorPage from "./ErrorPage"
 
 
 function App() {
@@ -29,7 +30,7 @@ function App() {
         <Route path="/adminpage/admincreate" element={<AdminCreate />} />
         <Route path="/adminpage/adminremove" element={<AdminRemove />} />
         <Route path="/adminpage/adminedit" element={<AdminEdit />} />
-        {/* <Route path="/*" element={<ErrorPage/>} */}
+        <Route path="/*" element={<ErrorPage/>} />
       </Routes>
     </BrowserRouter>
 

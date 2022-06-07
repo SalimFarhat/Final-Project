@@ -37,7 +37,7 @@ express()
 
 
 
-    .get(`/classes`, getAllClasses)
+    .get(`/classes/`, getAllClasses)
     .get(`/class/:_id`, getOneClass)
     .get(`/clients`, getAllClients)
     .get(`/client/:_id`, getOneClient)

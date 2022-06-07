@@ -6,17 +6,18 @@ export const CourseContext = createContext(null);
 
 export const CourseProvider = ({children}) => {
     
+    const [allWorkOuts, setAllWorkOuts] = useState();
     const [mainWorkOuts, setMainWorkOuts] = useState();
+    const [prevWorkOuts, setPrevWorkOuts] = useState();
     const [loadedStatus, setLoadedStatus] = useState("loading")
 
     // useEffect(() => {
-    //     fetch(`/api/users/`)
-    //     .then((res) => {return res.json()})
+    //     fetch(`/classes/`)
+    //     .then((res) => res.json())
     //     .then(data => {
-    //         // console.log(data.data)
-    //         setMainPageUsers(data.data)
-    //         // setStatus("ready")
-    //         setErrorMessage("");
+    //         console.log(data);
+    //         console.log(data.data)
+    //         setMainWorkOuts(data.data);
     //     })
     //     .catch(err => console.log(err))
     // }, [])
@@ -24,7 +25,7 @@ export const CourseProvider = ({children}) => {
     
 
     return(
-        <CourseContext.Provider value={{mainWorkOuts, setMainWorkOuts, loadedStatus, setLoadedStatus}}>
+        <CourseContext.Provider value={{mainWorkOuts, setMainWorkOuts, loadedStatus, setLoadedStatus, allWorkOuts, setAllWorkOuts, prevWorkOuts, setPrevWorkOuts}}>
             {children}
         </CourseContext.Provider>
 
