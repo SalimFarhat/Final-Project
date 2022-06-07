@@ -24,3 +24,5 @@ const joinClass = async (req, res) => {
     console.log("Disconnected")
     }
 }
+
+module.exports = {joinClass};

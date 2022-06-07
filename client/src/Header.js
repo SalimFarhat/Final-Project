@@ -1,26 +1,57 @@
 import styled from "styled-components";
 import { NavLink } from "react-router-dom";
 import { useContext } from "react";
-import {FaDumbbell} from "react-icons/fa";
+import {FaDumbbell, FaStar} from "react-icons/fa";
+import {SignedInContext} from "./Context/SignedInContext"
 
+{/* <FaStar /> */}
 const Header = () => {
+    const {signedIn, setSignedIn, status, setStatus, adminSignedIn, setAdminSignedIn, signedOutFunction, user, setUser} = useContext(SignedInContext)
+    let numStars;
+    console.log(signedIn)
+    console.log(adminSignedIn);
+    console.log(user.email)
+    if(user.email === "9@g.com"){
+        numStars = 5
+    }else if (user.email === "29@g.com"){
+        numStars = 3;
+    }else{
+        numStars = 0;
+    }
 
+    const SignOutButton = (ev) =>{
+        if(signedIn){
+            setSignedIn(false);
+            setAdminSignedIn(false);
+            setUser({email: null});
+        }
+    }
     return (
+        
         <Wrapper>
             <LeftLinks>
             <Link to="/"><FaDumbbell/></Link>
-            <Link to="/schedule">Schedule classes</Link>
+            {!signedIn && (<Link to="/schedule">View classes</Link>)}
+            {signedIn && (<Link to="/schedule">Schedule classes</Link>)}
+            {adminSignedIn && (<Link to="/modifyschedule">Modify schedule</Link>)}
+            {signedIn && !adminSignedIn && (<><Num><FaStar /></Num> <Num>{numStars}</Num> </>)}
             </LeftLinks>
             <RightLinks>
-                <Link to="/login"> Sign in</Link>
+                {signedIn || adminSignedIn ? <SignOut onClick={SignOutButton}> Sign out</SignOut> : <Link to="/login/"> Sign in</Link>}
             </RightLinks>
 
         </Wrapper>
+        
     )
 
 }
 
 export default Header;
+
+const Num = styled.p`
+    color: white;
+    margin-left: 10px;
+`
 
 
 const Wrapper = styled.div`
@@ -33,6 +64,7 @@ const Wrapper = styled.div`
     height: 40px;
     background-color: green;
     font-size: 24px;
+    color: white;
 `
 const LeftLinks = styled.div`
     display: flex;
@@ -46,6 +78,12 @@ const RightLinks = styled.div`
 const Link = styled(NavLink)`
     margin-left: 20px;
     text-decoration: none;
+    color: white;
+`
+
+const SignOut = styled.span`
+    cursor: pointer;
+    margin-left: 20px;
     color: white;
 `
 

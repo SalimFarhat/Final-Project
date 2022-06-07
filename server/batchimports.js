@@ -1,4 +1,4 @@
-const classes = require("./data/classes.json")
+const classes = require("./data/classes2.json")
 const clients = require("./data/clients.json")
 
 const {MongoClient} = require("mongodb")
@@ -23,9 +23,9 @@ const batchImport = async () => {
         await client.connect();
         console.log("connected");
         const result = await db.collection("Classes").insertMany(classes)
-        const result2 = await db.collection("Clients").insertMany(clients)
+        // const result2 = await db.collection("Clients").insertMany(clients)
         console.log(result);
-        console.log(result2);
+        // console.log(result2);
 
     }catch(err){
         console.log(err.stack)

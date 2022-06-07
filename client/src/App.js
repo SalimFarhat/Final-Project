@@ -10,6 +10,7 @@ import AdminCreate from "./AdminPages/AdminCreate";
 import AdminEdit from "./AdminPages/AdminEdit";
 import AdminPage from "./AdminPages/AdminPage";
 import AdminRemove from "./AdminPages/AdminRemove";
+import ModifySchedule from "./ModifySchedule";
 
 
 function App() {
@@ -22,6 +23,7 @@ function App() {
         <Route path="/" element={<HomePage />}/>
         <Route path="/schedule" element={<Schedule />}/>
         <Route path="/login" element={<LogIn />} />
+        <Route path="/modifyschedule" element={<ModifySchedule />} />
         {/* <Route path="/schedule/:id" /> */}
         <Route path="/adminpage" element={<AdminPage />} />
         <Route path="/adminpage/admincreate" element={<AdminCreate />} />
