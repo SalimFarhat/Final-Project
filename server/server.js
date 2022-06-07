@@ -26,7 +26,8 @@ const {deleteClient} = require("./handlers/deleteClient")
 const {updateClass} = require("./handlers/updateClass")
 const {signInUser} = require("./handlers/signIn")
 // const {removeClient} = require("./handlers/removeClient")
-// const {joinClass} = require("./handlers/joinClass")
+const {joinClass} = require("./handlers/joinClass")
+const {leaveClass} = require("./handlers/leaveClass")
 
 express()
     .use(morgan("tiny"))
@@ -56,8 +57,10 @@ express()
     
     .patch(`/mod-class/:_id`, updateClass)
     // .patch(`/remove-client`,removeClient)
+    .patch(`/leave-class/:_id`, leaveClass)
 
-    // .put(`/join-class`, joinClass)
+    .put(`/join-class/:_id`, joinClass)
+    
 
     .get(`/auth`, (req,res) => {
         console.log(req.oidc.isAuthenticated())

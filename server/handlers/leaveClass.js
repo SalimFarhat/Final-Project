@@ -8,27 +8,26 @@ const options = {
     useNewUrlParser: true,
     useUnifiedTopology: true,
 };
+// : [ "apples", "oranges" ] }
 
-
-const joinClass = async (req, res) => {
+const leaveClass = async (req, res) => {
     const client = new MongoClient(MONGO_URI, options);
     const db = client.db("BootCampGym");
-    console.log(req.params._id)
     const _id = req.params._id;
     const query = {_id}
     console.log(query)
     const Email = req.body.email;
+
     try{
         await client.connect()
         console.log("connected")
-        // const newValues = {$set: { {attending.push({req.body.email})} }};
         
         const result2 = await db.collection("Classes").findOne({_id: _id})
-        const result = await db.collection("Classes").updateOne({_id: _id}, {$push: { "attending": Email}})
-        console.log(result2);
+        const result = await db.collection("Classes").updateOne({_id: _id}, {$pull: { "attending": Email}})
+
         res.status(200).json({
             status: 200,
-            message: "You have joined the class!",
+            message: "You have left the class!",
             query: _id,
             data: result
         })
@@ -37,14 +36,15 @@ const joinClass = async (req, res) => {
         console.log(err)
         res.status(500).json({
             status: 500,
-            message: "Class not found"
+            data: err,
         })
 
     }finally{
-        
-    client.close()
-    console.log("Disconnected")
+        client.close()
+        console.log("Disconnected")
     }
+
 }
 
-module.exports = {joinClass};
+
+module.exports = {leaveClass};

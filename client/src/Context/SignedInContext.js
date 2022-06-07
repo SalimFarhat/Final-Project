@@ -21,7 +21,7 @@ export const SignedInProvider = ({children}) => {
         const [signedIn, setSignedIn] = useState(true);
         const [status, setStatus] = useState("Idle")
         const [adminSignedIn, setAdminSignedIn] = useState(false)
-        const [user, setUser] = useState({email: "2@g.com"})
+        const [user, setUser] = useState({email: "29@g.com"})
         
 
 
