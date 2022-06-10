@@ -18,10 +18,10 @@ export const SignedInProvider = ({children}) => {
         
         // SIMULATING LOGGED IN USER
 
-        const [signedIn, setSignedIn] = useState(true);
-        const [status, setStatus] = useState("Idle")
-        const [adminSignedIn, setAdminSignedIn] = useState(false)
-        const [user, setUser] = useState({email: "29@g.com"})
+        // const [signedIn, setSignedIn] = useState(true);
+        // const [status, setStatus] = useState("Idle")
+        // const [adminSignedIn, setAdminSignedIn] = useState(false)
+        // const [user, setUser] = useState({email: "9@g.com"})
         
 
 
@@ -29,10 +29,10 @@ export const SignedInProvider = ({children}) => {
         // SIMULATING LOGGED OUT USER
 
         
-        // const [signedIn, setSignedIn] = useState(false);
-        // const [status, setStatus] = useState("Idle")
-        // const [adminSignedIn, setAdminSignedIn] = useState(false)
-        // const [user, setUser] = useState({email: null})
+        const [signedIn, setSignedIn] = useState(false);
+        const [status, setStatus] = useState("Idle")
+        const [adminSignedIn, setAdminSignedIn] = useState(false)
+        const [user, setUser] = useState({email: null})
 
 
         const signedOutFunction = () => {
@@ -42,6 +42,21 @@ export const SignedInProvider = ({children}) => {
 
         }
 
+        // useEffect(() => {
+        //     if(user === null){
+        //         setUser(null)
+        //         return
+        //     }
+        //     //update below as needed
+        //     fetch("/login",{
+        //         post
+        //         body: email
+        //     })
+        // }, [user])
+
+        // setUser(google.email)
+
+        
 
 
         return(

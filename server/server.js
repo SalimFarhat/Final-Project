@@ -1,19 +1,37 @@
 const express = require("express");
 const morgan = require("morgan");
-require("dotenv").config()
+// const path = require("path");
 
-const { auth } = require('express-openid-connect');
+// const expressSession = require("express-session");
+// const passport = require("passport");
+// const Auth0Strategy = require("passport-auth0");
 
 
-const config = {
-    authRequired: false,
-    auth0Logout: true,
-    secret: process.env.SECRET,
-    baseURL: process.env.BASEURL,
-    clientID: process.env.CLIENTID,
-    issuerBaseURL: process.env.ISSUER,
-  };
+// require("dotenv").config()
 
+// const { auth } = require('express-openid-connect');
+
+
+// const config = {
+//     authRequired: false,
+//     auth0Logout: true,
+//     secret: process.env.SECRET,
+//     baseURL: process.env.BASEURL,
+//     clientID: process.env.CLIENTID,
+//     issuerBaseURL: process.env.ISSUER,
+// };
+
+// const session = {
+//     secret: process.env.SECRET,
+//     cookie: {},
+//     resave: false,
+//     saveUninitialized: false
+// };
+
+
+// if(express().get("env") === "production"){
+//     session.cookie.secure = true;
+// }
 
 const {getAllClasses} = require("./handlers/getAllClasses")
 const {getOneClass} = require("./handlers/getOneClass")
@@ -31,10 +49,10 @@ const {leaveClass} = require("./handlers/leaveClass")
 
 express()
     .use(morgan("tiny"))
-    .use(express.json())
+    .use(require("body-parser").json())
     .use(express.static("public"))
-    .use(auth(config))
-
+    
+    // .use(auth(config))
 
 
     .get(`/classes/`, getAllClasses)
@@ -62,14 +80,13 @@ express()
     .put(`/join-class/:_id`, joinClass)
     
 
-    .get(`/auth`, (req,res) => {
-        console.log(req.oidc.isAuthenticated())
+    // .get(`/auth`, (req,res) => {
+    //     console.log(req.oidc.isAuthenticated())
 
-    })
+    // })
 
 
     .get(`/`, (req, res) => {
-        console.log(req.oidc.isAuthenticated() ? 'Logged in' : 'Logged out')
         res.send("Let's see what this leads me to!")
     })
 

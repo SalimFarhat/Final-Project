@@ -1,7 +1,7 @@
 import { createContext, useEffect, useState } from "react";
 import { useContext } from "react";
 
-
+const todayDate = new Date()
 export const CourseContext = createContext(null);
 
 export const CourseProvider = ({children}) => {
@@ -10,17 +10,6 @@ export const CourseProvider = ({children}) => {
     const [mainWorkOuts, setMainWorkOuts] = useState();
     const [prevWorkOuts, setPrevWorkOuts] = useState();
     const [loadedStatus, setLoadedStatus] = useState("loading")
-
-    // useEffect(() => {
-    //     fetch(`/classes/`)
-    //     .then((res) => res.json())
-    //     .then(data => {
-    //         console.log(data);
-    //         console.log(data.data)
-    //         setMainWorkOuts(data.data);
-    //     })
-    //     .catch(err => console.log(err))
-    // }, [])
 
     
 
@@ -33,3 +22,4 @@ export const CourseProvider = ({children}) => {
 
     
 }
+

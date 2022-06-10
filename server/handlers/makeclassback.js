@@ -22,7 +22,6 @@ const makeClass = async (req, res) => {
     const db = client.db("BootCampGym")
     const { classType, difficulty, year, month, day, time } = req.body;
     // console.log(req.body.classType.toString())
-    console.log(req.body)
     let validClass = false;
     let validDifficult = false;
     let validDate = false;
@@ -57,6 +56,8 @@ const makeClass = async (req, res) => {
             console.log("This month does not have 31 days")
         }else if(parseInt(req.body.day) > 28 && monthToNum === 1){
             console.log("It's not feb, and that year is not a leap year")
+        }else if(newDate.getDate() > parseInt(req.body.day)){
+            console.log("Day has already passed")
         }
         else{
             validDay = true;

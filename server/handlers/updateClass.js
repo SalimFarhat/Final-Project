@@ -56,8 +56,6 @@ const updateClass = async (req, res) => {
             console.log("This month does not have 31 days")
         }else if(parseInt(req.body.day) > 28 && monthToNum === 1){
             console.log("It's not feb, and that year is not a leap year")
-        }else if(newDate.getDate() > parseInt(req.body.day)){
-            console.log("Day has already passed")
         }
         else{
             validDay = true;

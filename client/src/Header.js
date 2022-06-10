@@ -1,31 +1,91 @@
 import styled from "styled-components";
 import { NavLink } from "react-router-dom";
-import { useContext } from "react";
+import { useContext, useEffect } from "react";
 import {FaDumbbell, FaStar} from "react-icons/fa";
 import {SignedInContext} from "./Context/SignedInContext"
+import {CourseContext} from "./Context/CourseContext"
+
+const todayDate = new Date()
 
 {/* <FaStar /> */}
 const Header = () => {
     const {signedIn, setSignedIn, status, setStatus, adminSignedIn, setAdminSignedIn, signedOutFunction, user, setUser} = useContext(SignedInContext)
-    let numStars;
+    const {loadedStatus, setLoadedStatus, allWorkOuts, setAllWorkOuts} = useContext(CourseContext);
+    let currentWorkouts = []
+    let previousWorkouts = []
+    useEffect(() => {
+        fetch(`/classes/`)
+        .then((res) => res.json())
+        .then(data => {
+            setAllWorkOuts(data.data);
+        })
+        .catch(err => console.log(err))
+    }, [])
+    
+    if(allWorkOuts){
+        allWorkOuts.forEach(element => {
+            let monthToNum
+            if(element.month.toLowerCase() === "january"){
+                monthToNum = 0
+            }else if(element.month.toLowerCase() === "february"){
+                monthToNum = 1
+            }else if(element.month.toLowerCase() === "march"){
+                monthToNum = 2
+            }else if(element.month.toLowerCase() === "april"){
+                monthToNum = 3
+            }else if(element.month.toLowerCase() === "may"){
+                monthToNum = 4
+            }else if(element.month.toLowerCase() === "june"){
+                monthToNum = 5
+            }else if(element.month.toLowerCase() === "july"){
+                monthToNum = 6
+            }else if(element.month.toLowerCase() === "august"){
+                monthToNum = 7
+            }else if(element.month.toLowerCase() === "september"){
+                monthToNum = 8
+            }else if(element.month.toLowerCase() === "october"){
+                monthToNum = 9
+            }else if(element.month.toLowerCase() === "november"){
+                monthToNum = 10
+            }else if(element.month.toLowerCase() === "december"){
+                monthToNum = 11
+            }
+            if(parseInt(element.year) > todayDate.getFullYear()){
+                currentWorkouts.push(element)
+            }else if(parseInt(element.year) === todayDate.getFullYear() && monthToNum === todayDate.getMonth() && parseInt(element.day) > todayDate.getDate()){
+                currentWorkouts.push(element)
+            }else if(parseInt(element.year) === todayDate.getFullYear() && monthToNum > todayDate.getMonth()){
+                currentWorkouts.push(element)
+            }else{
+                previousWorkouts.push(element);
+            }
+            
+        });
+    }
+    
+    let numStars = 0;
     console.log(signedIn)
     console.log(adminSignedIn);
     console.log(user.email)
-    if(user.email === "9@g.com"){
-        numStars = 5
-    }else if (user.email === "29@g.com"){
-        numStars = 3;
-    }else{
-        numStars = 0;
-    }
 
+    previousWorkouts.forEach((e) => {
+        if(e.attending.includes(user.email)){
+            numStars++
+        }
+
+    })
+    console.log(numStars)
     const SignOutButton = (ev) =>{
-        if(signedIn){
+        if(signedIn || adminSignedIn){
             setSignedIn(false);
             setAdminSignedIn(false);
             setUser({email: null});
         }
     }
+
+
+
+
     return (
         
         <Wrapper>

@@ -2,108 +2,56 @@ import styled from "styled-components";
 import { NavLink } from "react-router-dom";
 import { useContext, useEffect } from "react";
 import { useAuth0 } from "@auth0/auth0-react";
-import {CourseContext} from "./Context/CourseContext"
-
-
-// if(allWorkOuts){
-//     allWorkOuts.forEach(element => {
-//         if(parseInt(element.year) < parseInt(todayDate.getFullYear())){
-//             if(parseInt(element.month) < todayDate.getMonth()){
-//                 if(parseInt(element.day) < todayDate.getDate()){
-//                     if(parseInt(element.time) <= todayDate.getHours()){
-//                         console.log(element);
-//                     }
-//                 }
-//             }
-//         }else{
-//             console.log("notworking")
-//         }
-        
-//     });
-// }
+import {CourseContext} from "./Context/CourseContext";
+import jwt_decode from "jwt-decode";
+import {SignedInContext} from "./Context/SignedInContext"
 
 
 
-// {mainWorkOuts.map(element => {
-//     return <p>{element.classType}</p>  
-//    })}
-
-const months = ["january", "february", "march", "april", "may", "june", "july", "august", "september", "october", "november", "december"]
-
-let counter = 0;
-let monthToNum = 0;
 
 
 
-const todayDate = new Date()
 
 const HomePage = () => {
     // const { user, isAuthenticated, isLoading } = useAuth0();
     // console.log(user);
     // console.log(isAuthenticated);
-    const {mainWorkOuts, setMainWorkOuts, loadedStatus, setLoadedStatus, allWorkOuts, setAllWorkOuts} = useContext(CourseContext);
-    let currentWorkouts = []
-    let previousWorkouts = []
-
-    useEffect(() => {
-        fetch(`/classes/`)
-        .then((res) => res.json())
-        .then(data => {
-            // console.log(data);
-            // console.log(data.data)
-            setAllWorkOuts(data.data);
-        })
-        .catch(err => console.log(err))
-    }, [])
-    // console.log(parseInt(allWorkOuts[0].time))
+    const {adminSignedIn, setAdminSignedIn, user, setUser, signedIn, setSignedIn} = useContext(SignedInContext);
 
 
-    if(allWorkOuts){
-    allWorkOuts.forEach(element => {
-        let monthToNum
-        if(element.month.toLowerCase() === "january"){
-            monthToNum = 0
-        }else if(element.month.toLowerCase() === "february"){
-            monthToNum = 1
-        }else if(element.month.toLowerCase() === "march"){
-            monthToNum = 2
-        }else if(element.month.toLowerCase() === "april"){
-            monthToNum = 3
-        }else if(element.month.toLowerCase() === "may"){
-            monthToNum = 4
-        }else if(element.month.toLowerCase() === "june"){
-            monthToNum = 5
-        }else if(element.month.toLowerCase() === "july"){
-            monthToNum = 6
-        }else if(element.month.toLowerCase() === "august"){
-            monthToNum = 7
-        }else if(element.month.toLowerCase() === "september"){
-            monthToNum = 8
-        }else if(element.month.toLowerCase() === "october"){
-            monthToNum = 9
-        }else if(element.month.toLowerCase() === "november"){
-            monthToNum = 10
-        }else if(element.month.toLowerCase() === "december"){
-            monthToNum = 11
-        }
-        // console.log(todayDate.getFullYear())
-        if(parseInt(element.year) >= todayDate.getFullYear() && monthToNum >= todayDate.getMonth() && parseInt(element.day) >= todayDate.getDate()){
-           
-            currentWorkouts.push(element)
+    function handleCallbackResponse(response){
+        // console.log("Encoded JWT ID token: " + response.credential);
+        const userObject = jwt_decode(response.credential);
+        console.log(userObject.email);
+        setUser({email: userObject.email})
+        if(userObject.email === 'salimfarhat@gmail.com'){
+            setAdminSignedIn(true);
         }else{
-            previousWorkouts.push(element);
+            setSignedIn(true);
         }
-        
-    });
-}
-    console.log(currentWorkouts)
-    console.log(previousWorkouts)
+    
+      }
+      console.log(user);
+    
+      useEffect(() => {
+        /* global google */
+        google.accounts.id.initialize({
+          client_id: "672969114635-vbcreqa34c4m92s6rok1o4dl83q0kodg.apps.googleusercontent.com",
+          callback: handleCallbackResponse
+        });
+        google.accounts.id.renderButton(
+          document.getElementById("signInDiv"),
+          {theme: "outline", size: "large"}
+        )
+      },[])
+
 
 
 
     return (
         <Wrapper>
             Hello Everyone! This is the homepage
+            <div id="signInDiv"></div>
 
 
         </Wrapper>

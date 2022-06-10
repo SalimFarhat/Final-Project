@@ -11,18 +11,11 @@ const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
     
-    <Auth0Provider
-     clientId='jTjdaq23KUdID018NSsZr9dH5VNJtosp'
-     domain='https://dev-0s0nqekt.us.auth0.com'
-     redirectUri='http://localhost:3000/login'
-     audience="/api/public"
-     scope="read:current_user update:current_user_metadata">
   <CourseProvider>
     <SignedInProvider>
         <App />
     </SignedInProvider>
   </CourseProvider>
-  </Auth0Provider>
   </React.StrictMode>
 );
 
@@ -67,3 +60,14 @@ root.render(
 //   </Auth0Provider>
 //   </React.StrictMode>
 // );
+
+
+
+// <Auth0Provider
+// clientId='jTjdaq23KUdID018NSsZr9dH5VNJtosp'
+// domain='https://dev-0s0nqekt.us.auth0.com'
+// redirectUri='http://localhost:3000/login'
+// audience="https://dev-0s0nqekt.us.auth0.com/api/v2/"
+// scope="read:current_user update:current_user_metadata">
+  
+//   </Auth0Provider>
