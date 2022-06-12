@@ -1,0 +1,23 @@
+/* *{
+    color: black;
+} */
+.react-calendar__navigation__arrow{
+    
+    color: black;
+}
+.react-calendar__navigation__label__labelText{
+    color: black;
+
+} 
+.react-calendar__navigation__label__labelText--from{
+    color: black;
+}
+
+.react-calendar__tile {
+    color: black;
+
+}
+
+.react-calendar__month-view__days__day{
+    color: black;
+}

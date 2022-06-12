@@ -64,9 +64,9 @@ const Header = () => {
     }
     
     let numStars = 0;
-    console.log(signedIn)
-    console.log(adminSignedIn);
-    console.log(user.email)
+    // console.log(signedIn)
+    // console.log(adminSignedIn);
+    // console.log(user.email)
 
     previousWorkouts.forEach((e) => {
         if(e.attending.includes(user.email)){
@@ -74,7 +74,7 @@ const Header = () => {
         }
 
     })
-    console.log(numStars)
+    // console.log(numStars)
     const SignOutButton = (ev) =>{
         if(signedIn || adminSignedIn){
             setSignedIn(false);
