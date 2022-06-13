@@ -14,6 +14,8 @@ import AdminPrev from "./AdminPages/AdminPrev"
 import ModifySchedule from "./ModifySchedule";
 import ErrorPage from "./ErrorPage"
 import Workoutpage from "./Workoutpage";
+import ClientPrevClass from "./ClientPrevClass";
+import ClassInfo from "./ClassInfo";
 
 
 
@@ -24,15 +26,16 @@ function App() {
     <Header />
       <Routes>
         <Route path="/" element={<HomePage />}/>
+        <Route path="/classinfo" element={<ClassInfo />}/>
         <Route path="/schedule" element={<Schedule />}/>
         <Route path="/class/:classId" element={<Workoutpage />}/>
         <Route path="/login" element={<LogIn />} />
         <Route path="/modifyschedule" element={<ModifySchedule />} />
-        {/* <Route path="/schedule/:id" /> */}
+        <Route path="/yourpreviousclasses" element={<ClientPrevClass />} />
         <Route path="/adminpage" element={<AdminPage />} />
         <Route path="/adminpage/admincreate" element={<AdminCreate />} />
         <Route path="/adminpage/adminremove" element={<AdminRemove />} />
-        <Route path="/adminpage/adminedit" element={<AdminEdit />} />>
+        <Route path="/adminpage/adminedit" element={<AdminEdit />} />
         <Route path="/adminpage/adminprev" element={<AdminPrev />} />
         <Route path="/*" element={<ErrorPage/>} />
       </Routes>

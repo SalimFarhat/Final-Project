@@ -4,8 +4,12 @@ import { useContext, useEffect } from "react";
 import {FaDumbbell, FaStar} from "react-icons/fa";
 import {SignedInContext} from "./Context/SignedInContext"
 import {CourseContext} from "./Context/CourseContext"
+import jwt_decode from "jwt-decode";
+import { useNavigate } from "react-router-dom";
 
 const todayDate = new Date()
+
+
 
 {/* <FaStar /> */}
 const Header = () => {
@@ -13,6 +17,8 @@ const Header = () => {
     const {loadedStatus, setLoadedStatus, allWorkOuts, setAllWorkOuts} = useContext(CourseContext);
     let currentWorkouts = []
     let previousWorkouts = []
+    const clientExercises = []
+    const History = useNavigate();
     useEffect(() => {
         fetch(`/classes/`)
         .then((res) => res.json())
@@ -64,22 +70,22 @@ const Header = () => {
     }
     
     let numStars = 0;
-    // console.log(signedIn)
-    // console.log(adminSignedIn);
-    // console.log(user.email)
 
     previousWorkouts.forEach((e) => {
         if(e.attending.includes(user.email)){
-            numStars++
+            numStars += parseInt(e.difficulty)
+            clientExercises.push(e)
         }
 
     })
-    // console.log(numStars)
+    console.log(numStars)
+    console.log(clientExercises);
     const SignOutButton = (ev) =>{
         if(signedIn || adminSignedIn){
             setSignedIn(false);
             setAdminSignedIn(false);
             setUser({email: null});
+            History(`/`);
         }
     }
 
@@ -93,10 +99,10 @@ const Header = () => {
             <Link to="/"><FaDumbbell/></Link>
             {!signedIn && (<Link to="/schedule">View classes</Link>)}
             {signedIn && (<Link to="/schedule">Schedule classes</Link>)}
-            {adminSignedIn && (<Link to="/modifyschedule">Modify schedule</Link>)}
-            {signedIn && !adminSignedIn && (<><Num><FaStar /></Num> <Num>{numStars}</Num> </>)}
+            {adminSignedIn && (<Link to="/modifyschedule">| Modify schedule</Link>)}
             </LeftLinks>
             <RightLinks>
+            {signedIn && !adminSignedIn && (<><Link to="/yourpreviousclasses"><FaStar /></Link> <Num>{numStars}</Num> </>)}
                 {signedIn || adminSignedIn ? <SignOut onClick={SignOutButton}> Sign out</SignOut> : <Link to="/login/"> Sign in</Link>}
             </RightLinks>
 
@@ -109,7 +115,7 @@ const Header = () => {
 export default Header;
 
 const Num = styled.p`
-    color: white;
+    color: black;
     margin-left: 10px;
 `
 
@@ -122,9 +128,9 @@ const Wrapper = styled.div`
     align-items: center;
     align-content: stretch;
     height: 40px;
-    background-color: green;
+    background: rgb(198, 197, 193, 0.75);
     font-size: 24px;
-    color: white;
+    color: black;
 `
 const LeftLinks = styled.div`
     display: flex;
@@ -138,13 +144,13 @@ const RightLinks = styled.div`
 const Link = styled(NavLink)`
     margin-left: 20px;
     text-decoration: none;
-    color: white;
+    color: black;
 `
 
 const SignOut = styled.span`
     cursor: pointer;
     margin-left: 20px;
-    color: white;
+    color: black;
 `
 
 

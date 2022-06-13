@@ -12,6 +12,7 @@ import {SignedInContext} from "./Context/SignedInContext";
 import moment from "moment";
 import "./dateHighlight.css"
 import "./Calendar.css"
+import bk from "./Images/schedulephoto.jpg"
 
 // import 'react-calendar/dist/Calendar.css';
 
@@ -136,9 +137,6 @@ if(currentWorkouts.length > 0){
         const selectedMonth = parseInt(tempMonth) - 1;
         const tempDay = dateStr[9] + dateStr[10];
         const selectedDay = parseInt(tempDay);
-        // console.log(selectedYear);
-        // console.log(selectedMonth);
-        // console.log(selectedDay);
         currentWorkouts.forEach((e) => {        
             let monthToNum
             if(e.month.toLowerCase() === "january"){
@@ -175,8 +173,6 @@ if(currentWorkouts.length > 0){
         })
         mapWorkouts = selectedWorkouts
     }
-    // console.log(currentWorkouts.length);
-    console.log(mapWorkouts.length);
 
 
 if(loadedStatus === "loading"){
@@ -207,32 +203,29 @@ if(loadedStatus === "loading"){
                     {e.classType} class
                 </WorkoutName>
                 <WorkoutName>
-                    Is rated {e.difficulty} difficulty stars!
+                    Rated {e.difficulty} difficulty stars
                 </WorkoutName>
                 <WorkoutDate>
                         {e.year} -
                         {e.month.toUpperCase()}-
-                        {e.day}- at 
-                    </WorkoutDate>
-                    <WorkoutDate>
-                        {e.time} hours
+                        {e.day}- at {e.time}
                     </WorkoutDate>
                     <NumberAttending>
-                    {e.attending.length} people schedule.
+                    {e.attending.length} people scheduled
                     </NumberAttending>
                     <NumberAttending>
                     {e.attending.includes(user.email) && (<>You are attending</>)}
                     </NumberAttending>
                     <JoinOrLeave>
-                        {!signedIn && !adminSignedIn && (<>Sign in to sign up!</>)}
+                        {!signedIn && !adminSignedIn && (<><Link to="/login">Sign in to sign up!</Link></>)}
                         {adminSignedIn && (<><Link to="/modifyschedule"> Modify or delete</Link></>)}
-                        {signedIn && (<><Link to={`/class/${e._id}`}>Sign Up or leave</Link></>)}
+                        {signedIn && e.attending.includes(user.email) && (<><Link to={`/class/${e._id}`}>Leave the class</Link></>)}
+                        {signedIn && !e.attending.includes(user.email) && (<><Link to={`/class/${e._id}`}>Join the class</Link></>)}
                     </JoinOrLeave>
             </SingleWorkoutWrapper>
 )})}
 
 </WorkoutWrapper>
-           
 
         </Wrapper>
         </>
@@ -241,15 +234,7 @@ if(loadedStatus === "loading"){
 }
 
 
-// {currentWorkouts.map((e) => {
-//     return (
-//         <div>
-//         <p>{e.classType}</p>
-//         <p>{e.difficulty}</p>
-//         <p>happening on {e.year} {e.month} {e.day} at {e.time}</p>
-//         </div>
-//     )
-// })}
+
 
 
 export default Schedule;
@@ -261,6 +246,11 @@ const Wrapper = styled.div`
 	justify-content: space-evenly;
 	align-items: center;
 	align-content: stretch; 
+height: 100vh;
+width: 100vw;
+background-image: url(${bk});
+background-position: center;
+background-size: cover;
 `
 
 const WorkoutWrapper = styled.div`
@@ -291,6 +281,7 @@ const SingleWorkoutWrapper = styled.div`
 	flex-direction: column;
     margin: 10px;
     border: 1px solid black;
+    background-color: aliceblue;
 `
 
 const WorkoutName = styled.div`
@@ -306,6 +297,7 @@ const JoinOrLeave = styled.div`
 const Logo = styled.div`
     display: flex;
     margin: 10px;
+    justify-content: center;
 `
 const Button = styled.button`
 `

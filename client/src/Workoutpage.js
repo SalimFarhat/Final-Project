@@ -11,6 +11,7 @@ import {TbYoga} from "react-icons/tb";
 import {GiWeightLiftingUp} from "react-icons/gi";
 import {MdFitnessCenter} from "react-icons/md";
 import {GrTime} from "react-icons/gr";
+import bk from "./Images/infopage.jpg";
 
 
 const Workoutpage = () => {
@@ -52,7 +53,7 @@ const Workoutpage = () => {
             console.log(data);
             if(data.message === "You have joined the class!"){
                 console.log("Success!")
-                History(`/schedule`)
+                History(`/`)
             }else{
                 console.log("Error detected")
                 setError(data.data);
@@ -89,7 +90,8 @@ const Workoutpage = () => {
     if(load !== "yes"){
         return (<>loading page</>)
     }
-    return (        
+    return (       
+        <Wrapper> 
     <WorkoutWrapper>
         <SingleWorkoutWrapper>
             <Logo>
@@ -105,29 +107,22 @@ const Workoutpage = () => {
             <WorkoutDate>
                 {workoutClass.year} -
                 {workoutClass.month.toUpperCase()}-
-                {workoutClass.day}- at 
+                {workoutClass.day}- at - {workoutClass.time}
             </WorkoutDate>
             <WorkoutDate>
-                {workoutClass.time} hours
-                </WorkoutDate>
+                This class is rated {workoutClass.difficulty} difficulty
+            </WorkoutDate>
             <NumberAttending>
             {workoutClass.attending.length} people schedule.
             </NumberAttending>
             <JoinOrLeave>
-            {workoutClass.attending.includes(user.email) ?
-             <>
-             You are attending. Would you like to cancel?
-             <button onClick={leaveIt}>Leave?</button>
-             </> 
-             : <>
-             Would you like to sign up?
-             <button onClick={joinIt}>join?</button>
-             </>}
+            {workoutClass.attending.includes(user.email) && (<Button onClick={leaveIt}>Leave?</Button>)}
+            {!workoutClass.attending.includes(user.email) && (<Button onClick={joinIt}>join?</Button>)}
             </JoinOrLeave>
         </SingleWorkoutWrapper>
 
     </WorkoutWrapper>
-
+    </Wrapper>
     )
 
 }
@@ -135,14 +130,20 @@ const Wrapper = styled.div`
 	display: flex;
 	flex-direction: column;
 	flex-wrap: wrap;
-	justify-content: space-evenly;
+	/* justify-content: space-evenly; */
 	align-items: center;
 	align-content: stretch; 
+height: 100vh;
+width: 100vw;
+background-image: url(${bk});
+background-position: center;
+background-size: cover;
 `
 
 const WorkoutWrapper = styled.div`
     display: flex;
 	flex-wrap: wrap;
+    margin-top: 50px;
 
 `
 
@@ -168,6 +169,7 @@ const SingleWorkoutWrapper = styled.div`
 	flex-direction: column;
     margin: 10px;
     border: 1px solid black;
+    background-color: aliceblue;
 `
 
 const WorkoutName = styled.div`
@@ -177,14 +179,39 @@ const WorkoutName = styled.div`
 
 const JoinOrLeave = styled.div`
     display: flex;
+    flex-direction: column;
     margin: 10px;
 `
 
 const Logo = styled.div`
     display: flex;
     margin: 10px;
+    justify-content: center;
 `
 const Button = styled.button`
+box-shadow: 3px 4px 0px 0px #899599;
+background:linear-gradient(to bottom, #ededed 5%, #bab1ba 100%);
+background-color:#ededed;
+border-radius:15px;
+border:1px solid #d6bcd6;
+display:inline-block;
+cursor:pointer;
+color:#3a8a9e;
+font-family:Arial;
+font-size:17px;
+padding:7px 25px;
+text-decoration:none;
+text-shadow:0px 1px 0px #e1e2ed;
+    &:hover{
+	background:linear-gradient(to bottom, #bab1ba 5%, #ededed 100%);
+	background-color:#bab1ba;
+
+    }
+    &:active{
+	position:relative;
+	top:1px;
+
+    }
 `
 
 export default Workoutpage;
