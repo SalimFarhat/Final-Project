@@ -171,16 +171,6 @@ justify-content: center;
 align-items: baseline;
 align-content: stretch;
 `
-// const CardWrapper = styled.div`
-// display: flex;
-// flex-direction: row;
-// flex-wrap: nowrap;
-// justify-content: space-evenly;
-// align-items: center;
-// align-content: stretch;
-//     color:white;
-
-// `
 
 const WorkoutWrapper = styled.div`
     display: flex;
@@ -190,16 +180,20 @@ const WorkoutWrapper = styled.div`
 `
 
 const SingleWorkoutWrapper = styled.div`
-    display: flex;
-	flex-direction: column;
-    margin: 10px;
-    border: 1px solid black;
-    background-color: aliceblue;
+display: flex;
+flex-direction: column;
+width: auto;
+border: 3px solid yellow;
+background-color: wheat;
+margin-left: 20px;
+margin-top: 40px;
+padding-bottom: 25px;
 `
 
 const WorkoutName = styled.div`
-    display: flex;
-    margin: 10px;
+display: flex;
+margin: 10px;
+font-size: 1.5em;
 `
 
 const JoinOrLeave = styled.div`
@@ -209,16 +203,18 @@ const JoinOrLeave = styled.div`
 
 const Logo = styled.div`
     display: flex;
-    justify-content: center;
     margin: 10px;
+    justify-content: center;
+    font-size: 2.75em;
 `
 const Button = styled.button`
 `
 
 
 const WorkoutDate = styled.div`
-    display: flex;
-    margin: 10px;
+display: flex;
+margin: 10px;
+font-size: 1.25em;
 
 `
 

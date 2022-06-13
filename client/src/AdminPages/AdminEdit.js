@@ -2,6 +2,7 @@ import styled from "styled-components"
 import { SignedInContext } from "../Context/SignedInContext";
 import { CourseContext } from "../Context/CourseContext";
 import { useEffect, useState, useContext } from "react";
+import bk from "../Images/OfficePic.jpeg"
 
 
 const months = ["january", "february", "march", "april", "may", "june", "july", "august", "september", "october", "november", "december"]
@@ -156,7 +157,10 @@ if(currentWorkouts.length > 0){
 
     return (
         <Wrapper>
-            <Label>Select class ID</Label>
+            <MenuWrapper>
+            <InnerWrapper>
+                
+        <Label>Select class ID</Label>
         <Label>Class Number: </Label>
         <List onChange = {(e) => {
             console.log(e.currentTarget)
@@ -179,9 +183,6 @@ if(currentWorkouts.length > 0){
 
             })}
         </List>
-        <Button onClick={handleClick}>
-            MODIFY
-        </Button>
 
         {workout && (
             <WorkoutWrapper>
@@ -251,9 +252,14 @@ if(currentWorkouts.length > 0){
                     <label htmlFor={"time"}></label>
                     <input required type="number" name="time" value={time} min="8" max="17" placeholder="Time" onChange={(e) => {setTime(e.currentTarget.value)}}/>
                 </Input>
+                
+        <Button onClick={handleClick}>
+            MODIFY
+        </Button>
 
             </FormGroup>
-        
+            </InnerWrapper>
+            </MenuWrapper>
         
         </Wrapper>
     )
@@ -261,13 +267,60 @@ if(currentWorkouts.length > 0){
 
 export default AdminEdit;
 
-const Wrapper = styled.div`
+const InnerWrapper = styled.div`
+margin-top: 50px;
     display: flex;
-    color: black;
+    flex-direction: column;
+    flex-wrap: nowrap;
+    justify-content: flex-start;
+    align-items: center;
+    align-content: flex-start;
+    border: 1px solid black;
+    background: rgb(255, 255, 255, 0.75);
+`
+
+const MenuWrapper = styled.div`
+
+display: flex;
+flex-wrap: wrap;
+justify-content: center;
+`
+
+const Wrapper = styled.div`
+display: flex;
+flex-direction: column;
+height: 100vh;
+width: 100vw;
+background-image: url(${bk});
+background-position: center;
+background-size: cover;
 
 `
 const Button = styled.button`
-    color: black;
+margin-top:40px;
+margin-bottom: 40px;
+box-shadow:inset 0px 1px 0px 0px #97c4fe;
+background:linear-gradient(to bottom, #3d94f6 5%, #1e62d0 100%);
+background-color:#3d94f6;
+border-radius:6px;
+border:1px solid #337fed;
+display:inline-block;
+cursor:pointer;
+color:#ffffff;
+font-family:Arial;
+font-size:15px;
+font-weight:bold;
+padding:6px 24px;
+text-decoration:none;
+text-shadow:0px 1px 0px #1570cd;
+&:hover{
+background:linear-gradient(to bottom, #1e62d0 5%, #3d94f6 100%);
+background-color:#1e62d0;
+}
+&:active{
+position:relative;
+top:1px;
+}
 `
 
 const Label = styled.label`
@@ -277,11 +330,14 @@ const Label = styled.label`
 const List = styled.select`
     padding: 10px;
     margin-left: 20px;
+    margin-right: 20px;
 `
 
 const WorkoutWrapper = styled.div`
-    display: flex;
-	flex-wrap: wrap;
+display: flex;
+flex-wrap: wrap;
+justify-content: center;
+
 
 `
 
@@ -292,8 +348,9 @@ const HeaderWrapper = styled.div`
 `
 
 const WorkoutDate = styled.div`
-    display: flex;
-    margin: 10px;
+display: flex;
+margin: 10px;
+font-size: 1.25em;
 
 `
 
@@ -303,15 +360,19 @@ const NumberAttending = styled.div`
 `
 
 const SingleWorkoutWrapper = styled.div`
-    display: flex;
-	flex-direction: column;
-    margin: 10px;
-    border: 1px solid black;
+display: flex;
+flex-direction: column;
+width: auto;
+border: 3px solid yellow;
+background-color: wheat;
+margin-top: 20px;
+padding-bottom: 10px;
 `
 
 const WorkoutName = styled.div`
-    display: flex;
-    margin: 10px;
+display: flex;
+margin: 10px;
+font-size: 1.5em;
 `
 
 const JoinOrLeave = styled.div`
@@ -320,12 +381,14 @@ const JoinOrLeave = styled.div`
 `
 
 const Logo = styled.div`
-    display: flex;
-    margin: 10px;
+display: flex;
+margin: 10px;
+justify-content: center;
+font-size: 2.75em;
 `
 
 const Input = styled.div`
-
+    margin-top: 10px;
 `
 const FormGroup = styled.div`
 

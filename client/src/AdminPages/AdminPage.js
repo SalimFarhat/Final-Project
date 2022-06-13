@@ -1,4 +1,5 @@
 import styled from "styled-components"
+import bk from "../Images/OfficePic.jpeg"
 
 const AdminPage = () => {
     return (

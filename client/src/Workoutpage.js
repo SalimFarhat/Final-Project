@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { useContext, useEffect, useState } from "react";
+import { useContext, useEffect, useState, useRef } from "react";
 import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import {SignedInContext} from "./Context/SignedInContext";
@@ -12,11 +12,24 @@ import {GiWeightLiftingUp} from "react-icons/gi";
 import {MdFitnessCenter} from "react-icons/md";
 import {GrTime} from "react-icons/gr";
 import bk from "./Images/infopage.jpg";
+import SnackBar from "./SnackBar";
+import giffy from "./Images/lifting.gif"
 
+
+const SnackBarType = {
+    join: "join",
+    leave: "leave"
+}
+
+// disabled = {changesBeingMade}
 
 const Workoutpage = () => {
     const {signedIn, setSignedIn, status, setStatus, adminSignedIn, setAdminSignedIn, signedOutFunction, user, setUser} = useContext(SignedInContext)
     const {loadedStatus, setLoadedStatus, allWorkOuts, setAllWorkOuts} = useContext(CourseContext);
+    const SnackBarRefJoin = useRef(null)
+    const SnackBarRefLeave = useRef(null) 
+    const [changesBeingMade, setChangesBeingMade] = useState(false);
+    
     const [workoutClass, setWorkoutClass] = useState(null);
     const [load, setLoad] = useState("no");
     const [error, setError] = useState(null);
@@ -38,6 +51,7 @@ const Workoutpage = () => {
 
 
     const joinIt = (ev) => {
+        setChangesBeingMade(true);
         fetch(`/join-class/${classId}`, {
             method: "PUT",
             headers: {
@@ -52,16 +66,20 @@ const Workoutpage = () => {
         .then(data => {
             console.log(data);
             if(data.message === "You have joined the class!"){
-                console.log("Success!")
-                History(`/`)
+                console.log(data.data)
+                const NewWorkoutClass = {...workoutClass}
+                NewWorkoutClass.attending.push(user.email);
+                setWorkoutClass(NewWorkoutClass)
+                SnackBarRefJoin.current.show()
+                // History(`/`)
             }else{
                 console.log("Error detected")
                 setError(data.data);
             }
-        })
-
+        }).finally(() => {setChangesBeingMade(false)})
     }
     const leaveIt = (ev) => {
+        setChangesBeingMade(true);
         fetch(`/leave-class/${classId}`, {
             method: "PATCH",
             headers: {
@@ -76,13 +94,17 @@ const Workoutpage = () => {
         .then(data => {
             console.log(data);
             if(data.message === "You have left the class!"){
-                console.log("Success!")
-                History(`/schedule`)
+                console.log(data.data)
+                const NewWorkoutClass = {...workoutClass}
+                NewWorkoutClass.attending.pop(user.email);
+                setWorkoutClass(NewWorkoutClass)
+                SnackBarRefLeave.current.show()
+                // History(`/`)
             }else{
                 console.log("Error detected")
                 setError(data.data);
             }
-        })
+        }).finally(() => {setChangesBeingMade(false)})
 
     }
 
@@ -92,6 +114,9 @@ const Workoutpage = () => {
     }
     return (       
         <Wrapper> 
+            
+            <SnackBar ref={SnackBarRefJoin} Message="You have joined the class" type={SnackBarType.join}/>
+            <SnackBar ref={SnackBarRefLeave} Message="You have left the class" type={SnackBarType.leave}/>
     <WorkoutWrapper>
         <SingleWorkoutWrapper>
             <Logo>
@@ -110,15 +135,21 @@ const Workoutpage = () => {
                 {workoutClass.day}- at - {workoutClass.time}
             </WorkoutDate>
             <WorkoutDate>
-                This class is rated {workoutClass.difficulty} difficulty
+            Rated {workoutClass.difficulty} difficulty stars
             </WorkoutDate>
             <NumberAttending>
-            {workoutClass.attending.length} people schedule.
+            {workoutClass.attending.length} person(s) scheduled.
             </NumberAttending>
-            <JoinOrLeave>
-            {workoutClass.attending.includes(user.email) && (<Button onClick={leaveIt}>Leave?</Button>)}
-            {!workoutClass.attending.includes(user.email) && (<Button onClick={joinIt}>join?</Button>)}
-            </JoinOrLeave>
+            {workoutClass.attending.includes(user.email) && (
+                <>
+                <Button disabled={changesBeingMade} onClick={leaveIt}>{changesBeingMade ? <Anim src={giffy} /> : "Leave"}</Button>
+                </>
+            )}            
+            {!workoutClass.attending.includes(user.email) && (
+                <>
+                <Button disabled={changesBeingMade} onClick={joinIt}>{changesBeingMade ? <Anim src={giffy} /> : "Join"}</Button>
+                </>
+            )}
         </SingleWorkoutWrapper>
 
     </WorkoutWrapper>
@@ -140,10 +171,16 @@ background-position: center;
 background-size: cover;
 `
 
+const Anim = styled.img`
+width: 75%;
+height: 75%;
+
+`
+
 const WorkoutWrapper = styled.div`
     display: flex;
 	flex-wrap: wrap;
-    margin-top: 50px;
+    margin-top: 20px;
 
 `
 
@@ -156,39 +193,48 @@ const HeaderWrapper = styled.div`
 const WorkoutDate = styled.div`
     display: flex;
     margin: 10px;
-
+    font-size: 1.25em;
 `
 
 const NumberAttending = styled.div`
     display: flex;
     margin: 10px;
+    font-size: 1.25em;
+
 `
 
 const SingleWorkoutWrapper = styled.div`
     display: flex;
 	flex-direction: column;
-    margin: 10px;
-    border: 1px solid black;
-    background-color: aliceblue;
+    width: auto;
+    border: 3px solid yellow;
+    background-color: wheat;
+    margin-left: 20px;
 `
 
 const WorkoutName = styled.div`
     display: flex;
     margin: 10px;
+    font-size: 1.5em;
 `
 
 const JoinOrLeave = styled.div`
     display: flex;
-    flex-direction: column;
     margin: 10px;
+    font-size: 1.25em;
 `
 
 const Logo = styled.div`
     display: flex;
     margin: 10px;
     justify-content: center;
+    font-size: 2.75em;
 `
+
 const Button = styled.button`
+width: 40%;
+margin-left: 30%;
+margin-bottom: 25px;
 box-shadow: 3px 4px 0px 0px #899599;
 background:linear-gradient(to bottom, #ededed 5%, #bab1ba 100%);
 background-color:#ededed;
@@ -211,6 +257,9 @@ text-shadow:0px 1px 0px #e1e2ed;
 	position:relative;
 	top:1px;
 
+    }
+    &:disabled{
+        color: red;
     }
 `
 

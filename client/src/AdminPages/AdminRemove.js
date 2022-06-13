@@ -2,6 +2,7 @@ import styled from "styled-components"
 import { SignedInContext } from "../Context/SignedInContext";
 import { CourseContext } from "../Context/CourseContext";
 import { useEffect, useState, useContext } from "react";
+import bk from "../Images/OfficePic.jpeg"
 
 const todayDate = new Date()
 
@@ -92,6 +93,8 @@ if(currentWorkouts.length > 0){
 
     return (
         <Wrapper>
+            <MenuWrapper>
+                <InnerWrapper>
             <Label>Select class ID</Label>
             <Label>Class Number: </Label>
             <List onChange = {(e) => {
@@ -134,15 +137,41 @@ if(currentWorkouts.length > 0){
 
                 </SingleWorkoutWrapper>
             )}
+            </InnerWrapper>
+            </MenuWrapper>
         </Wrapper>
     )
 }
 
 export default AdminRemove;
 
-const Wrapper = styled.div`
+const InnerWrapper = styled.div`
+margin-top: 50px;
     display: flex;
-    color: black;
+    flex-direction: column;
+    flex-wrap: nowrap;
+    justify-content: flex-start;
+    align-items: center;
+    align-content: flex-start;
+    border: 1px solid black;
+    background: rgb(255, 255, 255, 0.75);
+`
+
+const MenuWrapper = styled.div`
+
+display: flex;
+flex-wrap: wrap;
+justify-content: center;
+`
+
+const Wrapper = styled.div`
+display: flex;
+flex-direction: column;
+height: 100vh;
+width: 100vw;
+background-image: url(${bk});
+background-position: center;
+background-size: cover;
 `
 const Label = styled.label`
     color: black;
@@ -159,15 +188,18 @@ const Para = styled.p`
 
 
 const SingleWorkoutWrapper = styled.div`
-    display: flex;
-	flex-direction: column;
-    margin: 10px;
-    border: 1px solid black;
+display: flex;
+flex-direction: column;
+width: auto;
+border: 3px solid yellow;
+background-color: wheat;
+margin-left: 20px;
+margin-bottom: 40px;
 `
 const WorkoutDate = styled.div`
-    display: flex;
-    margin: 10px;
-
+display: flex;
+margin: 10px;
+font-size: 1.25em;
 `
 
 const WorkoutWrapper = styled.div`
@@ -176,10 +208,34 @@ const WorkoutWrapper = styled.div`
 
 `
 const WorkoutName = styled.div`
-    display: flex;
-    margin: 10px;
+display: flex;
+margin: 10px;
+font-size: 1.5em;
 `
 
 const Button = styled.button`
-    color: black;
+    margin-top:40px;
+margin-bottom: 40px;
+	box-shadow:inset 0px 1px 0px 0px #97c4fe;
+	background:linear-gradient(to bottom, #3d94f6 5%, #1e62d0 100%);
+	background-color:#3d94f6;
+	border-radius:6px;
+	border:1px solid #337fed;
+	display:inline-block;
+	cursor:pointer;
+	color:#ffffff;
+	font-family:Arial;
+	font-size:15px;
+	font-weight:bold;
+	padding:6px 24px;
+	text-decoration:none;
+	text-shadow:0px 1px 0px #1570cd;
+&:hover{
+	background:linear-gradient(to bottom, #1e62d0 5%, #3d94f6 100%);
+	background-color:#1e62d0;
+}
+&:active{
+	position:relative;
+	top:1px;
+}
 `

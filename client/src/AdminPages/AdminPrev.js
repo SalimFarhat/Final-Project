@@ -9,6 +9,7 @@ import {MdFitnessCenter} from "react-icons/md";
 import {GrTime} from "react-icons/gr";
 import { Link } from "react-router-dom";
 import {SignedInContext} from "../Context/SignedInContext";
+import bk from "../Images/OfficePic.jpeg"
 
 const todayDate = new Date()
 
@@ -83,6 +84,7 @@ if(loadedStatus === "loading"){
     return (
         <>
         <Wrapper>
+            <InnerWrapper>
             <HeaderWrapper>The following are the classes we currently offer: Yoga, HIIT, cycling, weight training, and crossfit</HeaderWrapper>
             <WorkoutWrapper>
                 {previousWorkouts.map((e) => {
@@ -114,7 +116,7 @@ if(loadedStatus === "loading"){
                 </SingleWorkoutWrapper>)
 })}
             </WorkoutWrapper>
-
+            </InnerWrapper>
         </Wrapper>
         </>
     )
@@ -123,8 +125,19 @@ if(loadedStatus === "loading"){
 
 export default AdminPrev;
 
-const Span = styled.span`
-display: flex;
+
+const InnerWrapper = styled.div`
+    display: flex;
+    flex-direction: column;
+    flex-wrap: nowrap;
+    justify-content: flex-start;
+    align-items: center;
+    align-content: flex-start;
+    border: 1px solid black;
+    background: rgb(255, 255, 255, 0.75);
+    padding-bottom: 50px;
+    padding-right: 25px;
+    padding-left: 25px;
 `
 
 const Wrapper = styled.div`
@@ -134,11 +147,17 @@ const Wrapper = styled.div`
 	justify-content: space-evenly;
 	align-items: center;
 	align-content: stretch; 
+    height: 100vh;
+    width: 100vw;
+background-image: url(${bk});
+background-position: center;
+background-size: cover;
 `
 
 const WorkoutWrapper = styled.div`
-    display: flex;
-	flex-wrap: wrap;
+display: flex;
+flex-wrap: wrap;
+justify-content: center;
 
 `
 
@@ -149,28 +168,32 @@ const HeaderWrapper = styled.div`
 `
 
 const WorkoutDate = styled.div`
-    display: flex;
-    margin: 10px;
-
+display: flex;
+margin: 10px;
+font-size: 1.25em;
 `
 
 const NumberAttending = styled.div`
     display: flex;
     flex-direction: column;
-    
     margin: 10px;
 `
 
 const SingleWorkoutWrapper = styled.div`
-    display: flex;
-	flex-direction: column;
-    margin: 10px;
-    border: 1px solid black;
+display: flex;
+flex-direction: column;
+width: auto;
+border: 3px solid yellow;
+background-color: wheat;
+margin-left: 20px;
+margin-top: 40px;
+padding-bottom: 25px;
 `
 
 const WorkoutName = styled.div`
-    display: flex;
-    margin: 10px;
+display: flex;
+margin: 10px;
+font-size: 1.5em;
 `
 
 const JoinOrLeave = styled.div`
@@ -179,6 +202,8 @@ const JoinOrLeave = styled.div`
 `
 
 const Logo = styled.div`
-    display: flex;
-    margin: 10px;
+display: flex;
+margin: 10px;
+justify-content: center;
+font-size: 2.75em;
 `

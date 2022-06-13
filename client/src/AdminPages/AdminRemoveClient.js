@@ -2,6 +2,7 @@ import styled from "styled-components"
 import { SignedInContext } from "../Context/SignedInContext";
 import { CourseContext } from "../Context/CourseContext";
 import { useEffect, useState, useContext } from "react";
+import bk from "../Images/OfficePic.jpeg"
 
 
 const AdminRemoveClient = () => {

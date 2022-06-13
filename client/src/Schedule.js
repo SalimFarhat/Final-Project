@@ -21,7 +21,7 @@ import Calendar from 'react-calendar';
 const todayDate = new Date()
 
 
-let mapWorkouts = []
+
 const Schedule = () => {
     const {signedIn, setSignedIn, status, setStatus, adminSignedIn, setAdminSignedIn, signedOutFunction, user, setUser} = useContext(SignedInContext)
     const {loadedStatus, setLoadedStatus, allWorkOuts, setAllWorkOuts} = useContext(CourseContext);
@@ -29,7 +29,9 @@ const Schedule = () => {
     const [date, setDate] = useState(new Date());
     const [showTime, setShowTime] = useState(false);
     const [selectedWorkout, setSelectedWorkout] = useState([]);
-
+    const [mapWorkouts, setMapWorkouts] = useState([])
+    const [selectedDate, setSelectedDate] = useState("")
+    // let mapWorkouts = []
     let currentWorkouts = []
     let previousWorkouts = []
     let mark = []
@@ -127,6 +129,7 @@ if(currentWorkouts.length > 0){
     })
 }
     const onChange = date => {
+        console.log("Hello")
         const selectedWorkouts = []
         let counter = 0
         setDate(date)
@@ -137,6 +140,7 @@ if(currentWorkouts.length > 0){
         const selectedMonth = parseInt(tempMonth) - 1;
         const tempDay = dateStr[9] + dateStr[10];
         const selectedDay = parseInt(tempDay);
+        const dateString = tempYear + "-" + tempMonth + "-" + tempDay;
         currentWorkouts.forEach((e) => {        
             let monthToNum
             if(e.month.toLowerCase() === "january"){
@@ -171,25 +175,26 @@ if(currentWorkouts.length > 0){
             }
             counter++;
         })
-        mapWorkouts = selectedWorkouts
+        // mapWorkouts = selectedWorkouts
+        setMapWorkouts(selectedWorkouts)
+        setSelectedDate("The classes are scheduled for the following Date " + dateString)
     }
 
-
+console.log(selectedDate)
 if(loadedStatus === "loading"){
     return "Loading";
 }else{
     return (
         <>
+        
         <Wrapper>
-           <Calendar
-           selectRange={true} onChange={onChange} value={date} minDate={new Date(todayDate)} maxDate={new Date(`2023-04-05`)}
-           tileClassName={({date, view}) => {if(mark.find(x => x===moment(date).format("YYYY-MM-DD"))){
-            return "highlight"
-        }}}
-
-           />
-           <WorkoutWrapper>
-           {mapWorkouts.length !== 0 && mapWorkouts.map((e) => {
+            {selectedDate !== "" && (
+                <>
+                <dateTitle><h3>{selectedDate}</h3></dateTitle>
+                </>
+            )}
+        <WorkoutWrapper>
+            {mapWorkouts.map((e) => {
             return( 
             <SingleWorkoutWrapper>
                 <Logo>
@@ -211,21 +216,27 @@ if(loadedStatus === "loading"){
                         {e.day}- at {e.time}
                     </WorkoutDate>
                     <NumberAttending>
-                    {e.attending.length} people scheduled
+                    {e.attending.length} person(s) scheduled.
                     </NumberAttending>
                     <NumberAttending>
                     {e.attending.includes(user.email) && (<>You are attending</>)}
                     </NumberAttending>
                     <JoinOrLeave>
-                        {!signedIn && !adminSignedIn && (<><Link to="/login">Sign in to sign up!</Link></>)}
-                        {adminSignedIn && (<><Link to="/modifyschedule"> Modify or delete</Link></>)}
-                        {signedIn && e.attending.includes(user.email) && (<><Link to={`/class/${e._id}`}>Leave the class</Link></>)}
-                        {signedIn && !e.attending.includes(user.email) && (<><Link to={`/class/${e._id}`}>Join the class</Link></>)}
+                        {!signedIn && !adminSignedIn && (<><Linker to="/login">Sign in to sign up!</Linker></>)}
+                        {adminSignedIn && (<><Linker to="/modifyschedule"> Modify or delete</Linker></>)}
+                        {signedIn && e.attending.includes(user.email) && (<><Linker to={`/class/${e._id}`}>Leave the class</Linker></>)}
+                        {signedIn && !e.attending.includes(user.email) && (<><Linker to={`/class/${e._id}`}>Join the class</Linker></>)}
                     </JoinOrLeave>
             </SingleWorkoutWrapper>
 )})}
 
 </WorkoutWrapper>
+            <Calendar
+            selectRange={true} onChange={onChange} value={date} minDate={new Date(todayDate)} maxDate={new Date(`2023-04-05`)}
+            tileClassName={({date, view}) => {if(mark.find(x => x===moment(date).format("YYYY-MM-DD"))){
+            return "highlight"
+        }}}/>
+           
 
         </Wrapper>
         </>
@@ -268,36 +279,51 @@ const HeaderWrapper = styled.div`
 const WorkoutDate = styled.div`
     display: flex;
     margin: 10px;
+    font-size: 1.25em;
 
 `
 
 const NumberAttending = styled.div`
     display: flex;
     margin: 10px;
+    font-size: 1.25em;
 `
 
 const SingleWorkoutWrapper = styled.div`
     display: flex;
 	flex-direction: column;
-    margin: 10px;
-    border: 1px solid black;
-    background-color: aliceblue;
+    width: auto;
+    border: 3px solid yellow;
+    background-color: wheat;
+    margin-left: 20px;
 `
 
 const WorkoutName = styled.div`
     display: flex;
     margin: 10px;
+    font-size: 1.5em;
 `
 
 const JoinOrLeave = styled.div`
     display: flex;
     margin: 10px;
+    font-size: 1.25em;
 `
 
 const Logo = styled.div`
     display: flex;
     margin: 10px;
     justify-content: center;
+    font-size: 2.75em;
 `
-const Button = styled.button`
+
+const dateTitle = styled.div`
+background-color: green;
+`
+const dateHeader = styled.h3`
+
+`
+const Linker = styled(Link)`
+text-decoration: none;
+    font-size: 1.25em;
 `

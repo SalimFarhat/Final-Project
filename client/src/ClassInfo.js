@@ -23,9 +23,9 @@ const ClassInfo = () => {
                 <InfoParagraph>We offer three levels of intensity in HIIT. Though all are challenging.</InfoParagraph>
                     
                 </InfoWrapper>
-                {!signedIn && !adminSignedIn && (<Button><Link to="/login">Sign in</Link></Button>)}
-                {signedIn && (<Button><Link to="/schedule">Find classes</Link></Button>)}
-                {adminSignedIn && (<Button><Link to="/modifyschedule">Schedule classes</Link></Button>)}
+                {!signedIn && !adminSignedIn && (<Link to="/login">Sign in</Link>)}
+                {signedIn && (<Link to="/schedule">Find classes</Link>)}
+                {adminSignedIn && (<Link to="/modifyschedule">Schedule classes</Link>)}
             </HIITWrapper>
             <YogaWrapper>
                 <IntroHeader>Yoga</IntroHeader>
@@ -35,9 +35,9 @@ const ClassInfo = () => {
                 </InfoParagraph>
                 <InfoParagraph>We offer three levels of intensity in Yoga, adjusted to your comfort levels and needs</InfoParagraph>
                 </InfoWrapper>
-                {!signedIn && !adminSignedIn && (<Button><Link to="/login">Sign in</Link></Button>)}
-                {signedIn && (<Button><Link to="/schedule">Find classes</Link></Button>)}
-                {adminSignedIn && (<Button><Link to="/modifyschedule">Schedule classes</Link></Button>)}
+                {!signedIn && !adminSignedIn && (<Link to="/login">Sign in</Link>)}
+                {signedIn && (<Link to="/schedule">Find classes</Link>)}
+                {adminSignedIn && (<Link to="/modifyschedule">Schedule classes</Link>)}
             </YogaWrapper>
             <CyclingWrapper>
                 <IntroHeader>Cycling</IntroHeader>
@@ -46,9 +46,9 @@ const ClassInfo = () => {
                     Our spin classes will allow you to burn the calories and sweat off the kilos in a sociable environment with other stationary cyclists
                 </InfoParagraph>
                 </InfoWrapper>
-                {!signedIn && !adminSignedIn && (<Button><Link to="/login">Sign in</Link></Button>)}
-                {signedIn && (<Button><Link to="/schedule">Find classes</Link></Button>)}
-                {adminSignedIn && (<Button><Link to="/modifyschedule">Schedule classes</Link></Button>)}
+                {!signedIn && !adminSignedIn && (<Link to="/login">Sign in</Link>)}
+                {signedIn && (<Link to="/schedule">Find classes</Link>)}
+                {adminSignedIn && (<Link to="/modifyschedule">Schedule classes</Link>)}
             </CyclingWrapper>
             <CrossfitWrapper>
                 <IntroHeader>Crossfit</IntroHeader>
@@ -57,9 +57,9 @@ const ClassInfo = () => {
                     With our Crossfit classes you will be fit and ready for any sport or activity you wish, and will get back in shape ASAP.
                 </InfoParagraph>
                 </InfoWrapper>
-                {!signedIn && !adminSignedIn && (<Button><Link to="/login">Sign in</Link></Button>)}
-                {signedIn && (<Button><Link to="/schedule">Find classes</Link></Button>)}
-                {adminSignedIn && (<Button><Link to="/modifyschedule">Schedule classes</Link></Button>)}
+                {!signedIn && !adminSignedIn && (<Link to="/login">Sign in</Link>)}
+                {signedIn && (<Link to="/schedule">Find classes</Link>)}
+                {adminSignedIn && (<Link to="/modifyschedule">Schedule classes</Link>)}
             </CrossfitWrapper>
             <WeightWrapper>
                 <IntroHeader>Weight Training</IntroHeader>
@@ -67,9 +67,9 @@ const ClassInfo = () => {
                 <InfoParagraph>From kettlebells to dumbbells and barbells, we offer classes on weight exercises that not only show the best technique, but also the best exercises for people to be able to achieve hyperthropy.
                     Our weight training classes are diverse and highly effective in training and growing muscles to minimize muscle loss while maximizing fat loss.</InfoParagraph>
                 </InfoWrapper>
-                {!signedIn && !adminSignedIn && (<Button><Link to="/login">Sign in</Link></Button>)}
-                {signedIn && (<Button><Link to="/schedule">Find classes</Link></Button>)}
-                {adminSignedIn && (<Button><Link to="/modifyschedule">Schedule classes</Link></Button>)}
+                {!signedIn && !adminSignedIn && (<Link to="/login">Sign in</Link>)}
+                {signedIn && (<Link to="/schedule">Find classes</Link>)}
+                {adminSignedIn && (<Link to="/modifyschedule">Schedule classes</Link>)}
             </WeightWrapper>
 
         </MainWrapper>
@@ -164,7 +164,12 @@ background-size: cover;
 `
 
 const Button = styled.button`
-margin-top: 20px;
+
+
+`
+
+const Link = styled(NavLink)`
+text-decoration: none;margin-top: 20px;
 box-shadow:inset 0px 1px 0px 0px #ffffff;
 	background:linear-gradient(to bottom, #ffffff 5%, #f6f6f6 100%);
 	background-color:#ffffff;
@@ -190,11 +195,6 @@ box-shadow:inset 0px 1px 0px 0px #ffffff;
 	top:1px;
 
 }
-
-`
-
-const Link = styled(NavLink)`
-text-decoration: none;
 	
 
 `

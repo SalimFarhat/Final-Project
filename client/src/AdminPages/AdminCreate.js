@@ -2,6 +2,7 @@ import styled from "styled-components"
 import { useContext, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { v4 as uuidv4} from 'uuid';
+import bk from "../Images/OfficePic.jpeg"
 
 
 const months = ["january", "february", "march", "april", "may", "june", "july", "august", "september", "october", "november", "december"]
@@ -94,10 +95,12 @@ const AdminCreate = () => {
 
     return (
         <Wrapper>
+            <MenuWrapper>
+                <InnerWrapper>
             <HeadWrapper>
                 The main Page to create classes
             </HeadWrapper>
-            <Para>Date must be in the future. No same day stuff! We can have multiple classes in the same timeslot</Para>
+            {/* <Para>Date must be in the future. No same day stuff! We can have multiple classes in the same timeslot</Para> */}
             
             <FormGroup>
                 <Input>
@@ -155,29 +158,58 @@ const AdminCreate = () => {
             </Button>
             
             {error === "" ? "" : <ErrorMessage>{error}</ErrorMessage>}
-
+            </InnerWrapper>
+            </MenuWrapper>
         </Wrapper>
     )
 }
 
 export default AdminCreate;
 
+const InnerWrapper = styled.div`
+margin-top: 50px;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: nowrap;
+    justify-content: flex-start;
+    align-items: center;
+    align-content: flex-start;
+    border: 1px solid black;
+    background: rgb(255, 255, 255, 0.75);
+`
+
+
 const Wrapper = styled.div`
 display: flex;
 flex-direction: column;
+height: 100vh;
+width: 100vw;
+background-image: url(${bk});
+background-position: center;
+background-size: cover;
+`
 
+const MenuWrapper = styled.div`
 
+display: flex;
+flex-wrap: wrap;
+justify-content: center;
 `
 const ErrorMessage = styled.div`
 
 ` 
 
 const Input = styled.div`
+/* width: 100%; */
+margin-top: 20px;
 
 `
 
 
 const HeadWrapper = styled.div`
+margin-top: 20px;
+margin-left: 20px;
+margin-right: 20px;
 
 
 `
@@ -191,5 +223,29 @@ const FormGroup = styled.div`
 `
 
 const Button = styled.button`
+margin-top:40px;
+margin-bottom: 40px;
+	box-shadow:inset 0px 1px 0px 0px #97c4fe;
+	background:linear-gradient(to bottom, #3d94f6 5%, #1e62d0 100%);
+	background-color:#3d94f6;
+	border-radius:6px;
+	border:1px solid #337fed;
+	display:inline-block;
+	cursor:pointer;
+	color:#ffffff;
+	font-family:Arial;
+	font-size:15px;
+	font-weight:bold;
+	padding:6px 24px;
+	text-decoration:none;
+	text-shadow:0px 1px 0px #1570cd;
+&:hover{
+	background:linear-gradient(to bottom, #1e62d0 5%, #3d94f6 100%);
+	background-color:#1e62d0;
+}
+&:active{
+	position:relative;
+	top:1px;
+}
 
 `
