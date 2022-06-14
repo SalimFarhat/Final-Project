@@ -53,7 +53,6 @@ const AdminRemove = () => {
         }else if(element.month.toLowerCase() === "december"){
             monthToNum = 11
         }
-        // console.log(todayDate.getFullYear())
         if(parseInt(element.year) >= todayDate.getFullYear() && monthToNum >= todayDate.getMonth() && parseInt(element.day) >= todayDate.getDate()){
            
             currentWorkouts.push(element)
@@ -66,11 +65,9 @@ const AdminRemove = () => {
 if(currentWorkouts.length > 0){
     setLoadedStatus("Loaded")
 }
-// console.log(currentWorkouts);
 
 
     const handleClick = (ev) => {
-        console.log(workout)
         
         fetch(`/class/${workout._id}`,{
             method: "DELETE",
@@ -81,7 +78,6 @@ if(currentWorkouts.length > 0){
         })
         .then((res) => res.json())
         .then(data => {
-            console.log(data.messasge);
             setWorkout(null)
         })
         .catch(err => console.log(err))
@@ -98,20 +94,13 @@ if(currentWorkouts.length > 0){
             <Label>Select class ID</Label>
             <Label>Class Number: </Label>
             <List onChange = {(e) => {
-                console.log(e.currentTarget)
                 setWorkout(JSON.parse(e.currentTarget.value))
                 }}>
                 <option value="Select a class">Select a class</option>
                 {currentWorkouts.map((wrkout) => {
-                    // console.log(wrkout)
-                    // console.log(typeof wrkout)
                         return <option 
                         key={wrkout._id}
                         value={JSON.stringify(wrkout)}
-                            // onChange={() => {
-                            //     let newWorkout = wrkout;
-                            //     setWorkout((workout) => ({...workout, ...newWorkout}));
-                            // }}
                             > 
                     {wrkout._id}
                     </option>
@@ -182,9 +171,6 @@ const List = styled.select`
     margin-left: 20px;
 `
 
-const Para = styled.p`
-    color: black;
-`
 
 
 const SingleWorkoutWrapper = styled.div`
@@ -202,11 +188,6 @@ margin: 10px;
 font-size: 1.25em;
 `
 
-const WorkoutWrapper = styled.div`
-    display: flex;
-	flex-wrap: wrap;
-
-`
 const WorkoutName = styled.div`
 display: flex;
 margin: 10px;

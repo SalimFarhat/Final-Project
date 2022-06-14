@@ -44,31 +44,4 @@ function App() {
   );
 }
 
-// const Main = styled.div`
-
-// `;
-
 export default App;
-
-
-
-// const App = () => {
-//   return (
-
-//     <BrowserRouter>
-//     {/* <GlobalStyles /> */}
-//     <Header />
-//       <div>
-//         <Switch>
-//           <Route exact path="/">
-//             <HomePage />
-//           </Route>
-//           <Route exact path="/schedule">
-//             <Schedule />
-//           </Route>
-//         </Switch>
-//       </div>
-
-//     </BrowserRouter>
-
-//   );

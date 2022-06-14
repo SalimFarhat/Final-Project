@@ -13,16 +13,6 @@ import {GrTime} from "react-icons/gr";
 
 const todayDate = new Date()
 
-
-// {clientExercises.map((e) => {
-//     return(
-//         <div>
-//         {e.classType}
-//         </div>
-//     )
-// })}
-
-
 const ClientPrevClass = () => {
     const {signedIn, setSignedIn, status, setStatus, adminSignedIn, setAdminSignedIn, signedOutFunction, user, setUser} = useContext(SignedInContext)
     const {loadedStatus, setLoadedStatus, allWorkOuts, setAllWorkOuts} = useContext(CourseContext);
@@ -84,8 +74,9 @@ const ClientPrevClass = () => {
                 clientExercises.push(e);
             }
         })
+        clientExercises.sort((a, b) => (a.month > b.month) ? 1: -1)
+        clientExercises.sort((a, b) => (a.day > b.day) ? 1: -1)
     }
-    console.log(clientExercises);
     
 
 
@@ -196,29 +187,16 @@ margin: 10px;
 font-size: 1.5em;
 `
 
-const JoinOrLeave = styled.div`
-    display: flex;
-    margin: 10px;
-`
-
 const Logo = styled.div`
     display: flex;
     margin: 10px;
     justify-content: center;
     font-size: 2.75em;
 `
-const Button = styled.button`
-`
-
 
 const WorkoutDate = styled.div`
 display: flex;
 margin: 10px;
 font-size: 1.25em;
 
-`
-
-const NumberAttending = styled.div`
-    display: flex;
-    margin: 10px;
 `

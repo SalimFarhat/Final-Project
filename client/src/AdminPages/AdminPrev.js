@@ -59,8 +59,6 @@ const AdminPrev = () => {
             }else if(element.month.toLowerCase() === "december"){
                 monthToNum = 11
             }
-            console.log(todayDate.getMonth())
-            console.log(monthToNum)
             if(parseInt(element.year) > todayDate.getFullYear()){
                 currentWorkouts.push(element)
             }else if(parseInt(element.year) === todayDate.getFullYear() && monthToNum === todayDate.getMonth() && parseInt(element.day) > todayDate.getDate()){
@@ -72,7 +70,11 @@ const AdminPrev = () => {
             }
             
         });
+        previousWorkouts.sort((a, b) => (a.month > b.month) ? 1: -1)
+        previousWorkouts.sort((a, b) => (a.day > b.day) ? 1: -1)
     }
+
+
 
 
 if(previousWorkouts.length > 0){
@@ -201,11 +203,6 @@ const WorkoutName = styled.div`
 display: flex;
 margin: 10px;
 font-size: 1.5em;
-`
-
-const JoinOrLeave = styled.div`
-    display: flex;
-    margin: 10px;
 `
 
 const Logo = styled.div`

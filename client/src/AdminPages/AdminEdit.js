@@ -66,7 +66,6 @@ const AdminEdit = () => {
         }else if(element.month.toLowerCase() === "december"){
             monthToNum = 11
         }
-        // console.log(todayDate.getFullYear())
         if(parseInt(element.year) >= todayDate.getFullYear() && monthToNum >= todayDate.getMonth() && parseInt(element.day) >= todayDate.getDate()){
            
             currentWorkouts.push(element)
@@ -79,12 +78,6 @@ const AdminEdit = () => {
 
     const handleClick = (ev) => {
         ev.preventDefault();
-        console.log(classType)
-        console.log(difficulty)
-        console.log(time)
-        console.log(month)
-        console.log(year)
-
         let counter = 0;
         let monthToNum = 0;
         let validClass = false
@@ -117,8 +110,6 @@ const AdminEdit = () => {
             validDate = true
         }
     }
-    console.log(validClass)
-    console.log(validDate)
     if(validClass && validDate){
         fetch(`/mod-class/${workout._id}`, {
             method: "PATCH",
@@ -137,7 +128,6 @@ const AdminEdit = () => {
         })
         .then(res => res.json())
         .then(data => {
-            console.log(data);
             if(data.message === "We found your class!"){
                 setWorkout(null)
                 History(`/modifyschedule`)
@@ -163,20 +153,13 @@ if(currentWorkouts.length > 0){
         <Label>Select class ID</Label>
         <Label>Class Number: </Label>
         <List onChange = {(e) => {
-            console.log(e.currentTarget)
             setWorkout(JSON.parse(e.currentTarget.value))
             }}>
             <option value="Select a class">Select a class</option>
             {currentWorkouts.map((wrkout) => {
-                // console.log(wrkout)
-                // console.log(typeof wrkout)
                     return <option 
                     key={wrkout._id}
                     value={JSON.stringify(wrkout)}
-                        // onChange={() => {
-                        //     let newWorkout = wrkout;
-                        //     setWorkout((workout) => ({...workout, ...newWorkout}));
-                        // }}
                         > 
                 {wrkout._id}
                 </option>

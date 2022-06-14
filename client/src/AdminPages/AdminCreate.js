@@ -58,8 +58,6 @@ const AdminCreate = () => {
             validDate = true
         }
     }
-    console.log(validClass)
-    console.log(validDate)
     if(validClass && validDate){
         fetch(`/add-class`, {
             method: "POST",
@@ -80,7 +78,6 @@ const AdminCreate = () => {
         })
         .then(res => res.json())
         .then(data => {
-            console.log(data);
             if(data.message === "class successfully added"){
                 console.log(data.data)
                 History(`/modifyschedule`)
@@ -200,8 +197,11 @@ const ErrorMessage = styled.div`
 ` 
 
 const Input = styled.div`
-/* width: 100%; */
+width: 100%;
 margin-top: 20px;
+    input{
+        width: 50%;
+    }
 
 `
 

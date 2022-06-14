@@ -14,7 +14,6 @@ import "./dateHighlight.css"
 import "./Calendar.css"
 import bk from "./Images/schedulephoto.jpg"
 
-// import 'react-calendar/dist/Calendar.css';
 
 import Calendar from 'react-calendar';
 
@@ -31,7 +30,6 @@ const Schedule = () => {
     const [selectedWorkout, setSelectedWorkout] = useState([]);
     const [mapWorkouts, setMapWorkouts] = useState([])
     const [selectedDate, setSelectedDate] = useState("")
-    // let mapWorkouts = []
     let currentWorkouts = []
     let previousWorkouts = []
     let mark = []
@@ -88,7 +86,6 @@ const Schedule = () => {
 }
 if(currentWorkouts.length > 0){
     setLoadedStatus("Loaded")
-    // YYYY-MM-DD
     currentWorkouts.forEach((e) => {
         let resultDate = ""
         resultDate += e.year + "-";
@@ -129,7 +126,6 @@ if(currentWorkouts.length > 0){
     })
 }
     const onChange = date => {
-        console.log("Hello")
         const selectedWorkouts = []
         let counter = 0
         setDate(date)
@@ -170,17 +166,14 @@ if(currentWorkouts.length > 0){
             }
             if(parseInt(e.year) === selectedYear && monthToNum === selectedMonth && parseInt(e.day) === selectedDay){
                 setSelectedWorkout(e)
-                console.log(currentWorkouts[counter])
                 selectedWorkouts.push(currentWorkouts[counter]);
             }
             counter++;
         })
-        // mapWorkouts = selectedWorkouts
         setMapWorkouts(selectedWorkouts)
         setSelectedDate("The classes are scheduled for the following Date " + dateString)
     }
 
-console.log(selectedDate)
 if(loadedStatus === "loading"){
     return "Loading";
 }else{
@@ -236,7 +229,7 @@ if(loadedStatus === "loading"){
             tileClassName={({date, view}) => {if(mark.find(x => x===moment(date).format("YYYY-MM-DD"))){
             return "highlight"
         }}}/>
-           
+        
 
         </Wrapper>
         </>

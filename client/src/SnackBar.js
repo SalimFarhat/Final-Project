@@ -8,7 +8,6 @@ const SnackBar = forwardRef((props, ref) => {
     const [showSnackBar, setShowSnackBar] = useState(false);
     useImperativeHandle(ref, () => ({
         show(){
-            console.log("show me!")
             setShowSnackBar(true);
             setTimeout(() => {
                 setShowSnackBar(false)

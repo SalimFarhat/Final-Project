@@ -78,8 +78,6 @@ const Header = () => {
         }
 
     })
-    console.log(numStars)
-    console.log(clientExercises);
     const SignOutButton = (ev) =>{
         if(signedIn || adminSignedIn){
             setSignedIn(false);
@@ -153,34 +151,3 @@ const SignOut = styled.span`
     color: black;
 `
 
-
-// return (
-//     <Wrapper>
-//       <NavLink to="/">
-//       <Logo>
-//         <LinkedHeader>Sling Airlines</LinkedHeader>
-//       </Logo>
-//       </NavLink>
-    
-//         {resInfo || localStorage.getItem('resId') ?
-//         <Nav>
-//           <StyledNavLink to="/view-reservation">Reservation</StyledNavLink>
-//         </Nav>
-//         :
-//         <></>
-//     }
-//     </Wrapper>
-//   )};
-
-
-// return (
-//     <Wrapper>
-//         <FaceSpaceHeader>
-//             <NavigationLink to="/"><FaceSpace>Facespace</FaceSpace></NavigationLink>
-//         </FaceSpaceHeader>
-//         <SignIn>
-//         {signedIn ? <Para>Howdy, {currentUser.name}! <SignOut onClick={SignOutButton}> Sign out </SignOut></Para> : <NavigationLink to="/LogIn">Sign In</NavigationLink>}
-            
-//         </SignIn>
-//     </Wrapper>
-// )

@@ -33,17 +33,14 @@ const Workoutpage = () => {
     const [workoutClass, setWorkoutClass] = useState(null);
     const [load, setLoad] = useState("no");
     const [error, setError] = useState(null);
-    console.log(user.email);
     
     const {classId} = useParams();
     const History = useNavigate();
 
-    console.log(classId);
         useEffect(() => {
         fetch(`/class/${classId}`)
         .then(res => res.json())
         .then(data => {
-            console.log(data);
             setWorkoutClass(data.data);
             setLoad("yes")
         })
@@ -64,14 +61,11 @@ const Workoutpage = () => {
         })
         .then(res => res.json())
         .then(data => {
-            console.log(data);
             if(data.message === "You have joined the class!"){
-                console.log(data.data)
                 const NewWorkoutClass = {...workoutClass}
                 NewWorkoutClass.attending.push(user.email);
                 setWorkoutClass(NewWorkoutClass)
                 SnackBarRefJoin.current.show()
-                // History(`/`)
             }else{
                 console.log("Error detected")
                 setError(data.data);
@@ -92,9 +86,7 @@ const Workoutpage = () => {
         })
         .then(res => res.json())
         .then(data => {
-            console.log(data);
             if(data.message === "You have left the class!"){
-                console.log(data.data)
                 const NewWorkoutClass = {...workoutClass}
                 NewWorkoutClass.attending.pop(user.email);
                 setWorkoutClass(NewWorkoutClass)
