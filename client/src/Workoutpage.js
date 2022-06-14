@@ -110,7 +110,9 @@ const Workoutpage = () => {
 
 
     if(load !== "yes"){
-        return (<>loading page</>)
+        return (
+            <LoadWrapper><Image src={giffy}/></LoadWrapper>
+            )
     }
     return (       
         <Wrapper> 
@@ -157,6 +159,22 @@ const Workoutpage = () => {
     )
 
 }
+
+const Image = styled.img`
+
+`
+const LoadWrapper = styled.div`
+
+display: flex;
+	flex-direction: column;
+	flex-wrap: nowrap;
+	justify-content: center;
+	align-items: center;
+	align-content: stretch;
+
+`
+
+
 const Wrapper = styled.div`
 	display: flex;
 	flex-direction: column;

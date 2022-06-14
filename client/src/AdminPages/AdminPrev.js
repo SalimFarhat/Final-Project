@@ -10,6 +10,7 @@ import {GrTime} from "react-icons/gr";
 import { Link } from "react-router-dom";
 import {SignedInContext} from "../Context/SignedInContext";
 import bk from "../Images/OfficePic.jpeg"
+import giffy from "../Images/lifting.gif"
 
 const todayDate = new Date()
 
@@ -79,7 +80,9 @@ if(previousWorkouts.length > 0){
 }
 
 if(loadedStatus === "loading"){
-    return "Loading";
+    return (
+        <Image src={giffy}/>
+    );
 }else{
     return (
         <>
@@ -124,6 +127,10 @@ if(loadedStatus === "loading"){
 }
 
 export default AdminPrev;
+
+const Image = styled.img`
+
+`
 
 
 const InnerWrapper = styled.div`
