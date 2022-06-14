@@ -3,13 +3,14 @@ import { SignedInContext } from "../Context/SignedInContext";
 import { CourseContext } from "../Context/CourseContext";
 import { useEffect, useState, useContext } from "react";
 import bk from "../Images/OfficePic.jpeg"
-
+import { useNavigate } from "react-router-dom";
 
 const months = ["january", "february", "march", "april", "may", "june", "july", "august", "september", "october", "november", "december"]
 
 const todayDate = new Date()
 
 const AdminEdit = () => {
+    const History = useNavigate();
 
     const {signedIn, setSignedIn, status, setStatus, adminSignedIn, setAdminSignedIn, signedOutFunction, user, setUser} = useContext(SignedInContext)
     const {loadedStatus, setLoadedStatus, allWorkOuts, setAllWorkOuts} = useContext(CourseContext);
@@ -179,6 +180,9 @@ if(currentWorkouts.length > 0){
                 <SingleWorkoutWrapper>
                     <WorkoutName>
                         {workout.classType}
+                    </WorkoutName>
+                    <WorkoutName>
+                        {workout.difficulty} difficulty
                     </WorkoutName>
                     <WorkoutDate>
                         {workout.year} -
