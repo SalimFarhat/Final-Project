@@ -16,6 +16,7 @@ import ErrorPage from "./ErrorPage"
 import Workoutpage from "./Workoutpage";
 import ClientPrevClass from "./ClientPrevClass";
 import ClassInfo from "./ClassInfo";
+import YourClasses from "./YourClasses";
 
 
 
@@ -27,6 +28,7 @@ function App() {
       <Routes>
         <Route path="/" element={<HomePage />}/>
         <Route path="/classinfo" element={<ClassInfo />}/>
+        <Route path="/yourclasses" element={<YourClasses />}/>
         <Route path="/schedule" element={<Schedule />}/>
         <Route path="/class/:classId" element={<Workoutpage />}/>
         <Route path="/login" element={<LogIn />} />

@@ -13,7 +13,7 @@ import {GrTime} from "react-icons/gr";
 
 const todayDate = new Date()
 
-const ClientPrevClass = () => {
+const YourClasses = () => {
     const {signedIn, setSignedIn, status, setStatus, adminSignedIn, setAdminSignedIn, signedOutFunction, user, setUser} = useContext(SignedInContext)
     const {loadedStatus, setLoadedStatus, allWorkOuts, setAllWorkOuts} = useContext(CourseContext);
 
@@ -70,7 +70,7 @@ const ClientPrevClass = () => {
             }
             
         });
-        previousWorkouts.forEach((e) => {
+        currentWorkouts.forEach((e) => {
             if(e.attending.includes(user.email)){
                 clientExercises.push(e);
             }
@@ -78,53 +78,55 @@ const ClientPrevClass = () => {
         clientExercises.sort((a, b) => (a.month > b.month) ? 1: -1)
         clientExercises.sort((a, b) => (a.day > b.day) ? 1: -1)
         clientExercises.sort((a, b) => (a.year > b.year) ? 1: -1)
-      }
+    }
     
+
+
 
 
     return(
         <Wrapper>
-            <TitleWrapper>
-                <Para>Welcome to your star athlete page!</Para>
-            </TitleWrapper>
-            
-            <InfoWrapper>
-                <Para2>For every class you attended, you will earn stars based on the difficulty rating of the workout. Below are the classes you have attended</Para2>
-            </InfoWrapper>
-            
-            <WorkoutWrapper>
-           {clientExercises.length !== 0 && clientExercises.map((e) => {
-            return( 
-            <SingleWorkoutWrapper>
-                <Logo>
-                    {e.classType === "yoga" ? <TbYoga /> : ""}
-                    {e.classType === "weights" ? <GiWeightLiftingUp /> : ""}
-                    {e.classType === "cycling" ? <BiCycling /> : ""}
-                    {e.classType === "crossfit" ? <MdFitnessCenter /> : ""}
-                    {e.classType === "HIIT" ? <GrTime /> : ""}
-                </Logo>                
-                <WorkoutDate>
-                        On {e.year} - {e.month.toUpperCase()} - {e.day}- at {e.time}
-                    </WorkoutDate>
+        <TitleWrapper>
+            <Para>Welcome to your scheduled classes</Para>
+        </TitleWrapper>
+        
+        <InfoWrapper>
+            <Para2>You have signed up for the following classes. Upon confirmation of attendance, you will earn a star for every difficulty level</Para2>
+        </InfoWrapper>
+        
+        <WorkoutWrapper>
+       {clientExercises.length !== 0 && clientExercises.map((e) => {
+        return( 
+        <SingleWorkoutWrapper>
+            <Logo>
+                {e.classType === "yoga" ? <TbYoga /> : ""}
+                {e.classType === "weights" ? <GiWeightLiftingUp /> : ""}
+                {e.classType === "cycling" ? <BiCycling /> : ""}
+                {e.classType === "crossfit" ? <MdFitnessCenter /> : ""}
+                {e.classType === "HIIT" ? <GrTime /> : ""}
+            </Logo>                
+            <WorkoutDate>
+                    On {e.year} - {e.month.toUpperCase()} - {e.day}- at {e.time}
+                </WorkoutDate>
 
-                <WorkoutName>
-                    You attended a {e.classType} class
-                </WorkoutName>
-                <WorkoutName>
-                    And earned {e.difficulty} stars!
-                </WorkoutName>
+            <WorkoutName>
+                You have a {e.classType} class
+            </WorkoutName>
+            <WorkoutName>
+                 Rated {e.difficulty} diffculty
+            </WorkoutName>
 
-            </SingleWorkoutWrapper>
+        </SingleWorkoutWrapper>
 )})}
 
 </WorkoutWrapper>
 
 
-        </Wrapper>
-    )
+    </Wrapper>
+)
 }
 
-export default ClientPrevClass;
+export default YourClasses;
 
 const Para = styled.p`
     font-size: 2em;

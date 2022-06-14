@@ -101,6 +101,7 @@ const Header = () => {
             </LeftLinks>
             <RightLinks>
             {signedIn && !adminSignedIn && (<><Link to="/yourpreviousclasses"><FaStar /></Link> <Num>{numStars}</Num> </>)}
+            {signedIn && !adminSignedIn && (<><Link to="/yourclasses">Your Classes</Link></>)}
                 {signedIn || adminSignedIn ? <SignOut onClick={SignOutButton}> Sign out</SignOut> : <Link to="/login/"> Sign in</Link>}
             </RightLinks>
 

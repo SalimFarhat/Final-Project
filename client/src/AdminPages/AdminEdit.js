@@ -67,13 +67,20 @@ const AdminEdit = () => {
             monthToNum = 11
         }
         if(parseInt(element.year) >= todayDate.getFullYear() && monthToNum >= todayDate.getMonth() && parseInt(element.day) >= todayDate.getDate()){
-           
             currentWorkouts.push(element)
-        }else{
+        }else if(parseInt(element.year) >= todayDate.getFullYear() && monthToNum >= todayDate.getMonth() && parseInt(element.day) <= todayDate.getDate()){
+            currentWorkouts.push(element)
+        }else if(parseInt(element.year) > todayDate.getFullYear()){
+            currentWorkouts.push(element)
+        }
+        else{
             previousWorkouts.push(element);
         }
         
     });
+    
+    currentWorkouts.sort((a, b) => (a.day > b.day) ? 1: -1)
+    currentWorkouts.sort((a, b) => (a.month > b.month) ? 1: -1)
 }
 
     const handleClick = (ev) => {
@@ -152,7 +159,7 @@ if(currentWorkouts.length > 0){
                 
         <Label>Select class ID</Label>
         <Label>Class Number: </Label>
-        <List onChange = {(e) => {
+        <List max={currentWorkouts.length}onChange = {(e) => {
             setWorkout(JSON.parse(e.currentTarget.value))
             }}>
             <option value="Select a class">Select a class</option>
@@ -161,7 +168,7 @@ if(currentWorkouts.length > 0){
                     key={wrkout._id}
                     value={JSON.stringify(wrkout)}
                         > 
-                {wrkout._id}
+                {wrkout.year + " " + wrkout.month + " " +  wrkout.day + " " + wrkout.time}
                 </option>
 
             })}

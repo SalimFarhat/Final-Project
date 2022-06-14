@@ -59,19 +59,21 @@ const AdminPrev = () => {
             }else if(element.month.toLowerCase() === "december"){
                 monthToNum = 11
             }
-            if(parseInt(element.year) > todayDate.getFullYear()){
+            if(parseInt(element.year) >= todayDate.getFullYear() && monthToNum >= todayDate.getMonth() && parseInt(element.day) >= todayDate.getDate()){
                 currentWorkouts.push(element)
-            }else if(parseInt(element.year) === todayDate.getFullYear() && monthToNum === todayDate.getMonth() && parseInt(element.day) > todayDate.getDate()){
+            }else if(parseInt(element.year) >= todayDate.getFullYear() && monthToNum >= todayDate.getMonth() && parseInt(element.day) <= todayDate.getDate()){
                 currentWorkouts.push(element)
-            }else if(parseInt(element.year) === todayDate.getFullYear() && monthToNum > todayDate.getMonth()){
+            }else if(parseInt(element.year) > todayDate.getFullYear()){
                 currentWorkouts.push(element)
-            }else{
+            }
+            else{
                 previousWorkouts.push(element);
             }
             
         });
         previousWorkouts.sort((a, b) => (a.month > b.month) ? 1: -1)
         previousWorkouts.sort((a, b) => (a.day > b.day) ? 1: -1)
+        previousWorkouts.sort((a, b) => (a.year > b.year) ? 1: -1)
     }
 
 
@@ -115,9 +117,12 @@ if(loadedStatus === "loading"){
                         </WorkoutDate>
                     <NumberAttending>
                         
-                    attendees: {e.attending}
+                    attendees:
 
                     </NumberAttending>
+                    {e.attending.map((e) => {
+                        return (<Para>{e}</Para>)
+                    })}
                 </SingleWorkoutWrapper>)
 })}
             </WorkoutWrapper>
@@ -210,4 +215,10 @@ display: flex;
 margin: 10px;
 justify-content: center;
 font-size: 2.75em;
+`
+
+const Para = styled.p`
+    margin-bottom: 10px;
+    margin-left: 10px;
+    padding-right: 5px;
 `
