@@ -19,7 +19,7 @@ import Calendar from 'react-calendar';
 
 const todayDate = new Date()
 
-
+//This uses the react-calendar in order to render the calendar and allow us to use the calendar to look through and joni/leave clases
 
 const Schedule = () => {
     const {signedIn, setSignedIn, status, setStatus, adminSignedIn, setAdminSignedIn, signedOutFunction, user, setUser} = useContext(SignedInContext)
@@ -43,6 +43,8 @@ const Schedule = () => {
         .catch(err => console.log(err))
     }, [])
 
+    //This renders all of the upcoming classes The same code is used many times over in this project. But here another thing is added. Adding an array of the adtes that need to be marked on
+    // on the calendar to draw the client's attention to them.
 
     if(allWorkOuts){
     allWorkOuts.forEach(element => {
@@ -125,6 +127,9 @@ if(currentWorkouts.length > 0){
         mark.push(resultDate);
     })
 }
+
+    //this controls the clicking to fetch the appropriate classes for the day. Since the date is set differently, I needed to make the fetched date a string done in a specific way.
+
     const onChange = date => {
         const selectedWorkouts = []
         let counter = 0

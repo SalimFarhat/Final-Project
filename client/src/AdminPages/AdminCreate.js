@@ -23,6 +23,11 @@ const AdminCreate = () => {
     const [time, setTime] = useState(null)
     const [error, setError] = useState("");
 
+
+    
+        //The following is primarily reused code from the server (modified) to make sure that the information entered is correct before sending it to the backend
+        // There is no loading of the current workouts as we do not need to display anything.
+
     const handleClick = (ev) => {
         ev.preventDefault();
 

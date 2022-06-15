@@ -39,6 +39,8 @@ const AdminEdit = () => {
     }, [])
 
 
+    //This part checks first if all the workout classes are loaded and then seperates past workuts from current and sorts them appropriately.
+
     if(allWorkOuts){
     allWorkOuts.forEach(element => {
         let monthToNum
@@ -83,6 +85,8 @@ const AdminEdit = () => {
     currentWorkouts.sort((a, b) => (a.day > b.day) ? 1: -1)
     currentWorkouts.sort((a, b) => (a.month > b.month) ? 1: -1)
 }
+
+        //The following is primarily reused code from the server (modified) to make sure that the information entered is correct before sending it to the backend
 
     const handleClick = (ev) => {
         ev.preventDefault();

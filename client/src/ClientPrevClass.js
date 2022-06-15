@@ -21,6 +21,9 @@ const ClientPrevClass = () => {
     let finalExercises = []
     let currentWorkouts = []
     let previousWorkouts = []
+
+    //fetches all the workouts.
+
     useEffect(() => {
         fetch(`/classes/`)
         .then((res) => res.json())
@@ -29,6 +32,9 @@ const ClientPrevClass = () => {
         })
         .catch(err => console.log(err))
     }, [])
+
+    //this function sorts out all of the workouts and returns the one that the client participated in. As the workout is an array of objects, and they are all mostly strings. The month needs to be turned into a number.
+    // and since the new Date() constructor has a month range of 0 (January) to 11 (December) the month entered must be turned into the corresponding number for verification.
     
     if(allWorkOuts){
         allWorkOuts.forEach(element => {

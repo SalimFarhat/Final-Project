@@ -8,6 +8,8 @@ import { useNavigate } from "react-router-dom";
 import bk from "./loginphoto.jpg"
 
 
+//the login screen uses google identity verification. This was done over Auth0 as we had some difficulty in using Auth0.
+
 const LogIn = () => {
     const {signedIn, setSignedIn, status, setStatus, adminSignedIn, setAdminSignedIn, signedOutFunction, user, setUser} = useContext(SignedInContext)
 
@@ -15,8 +17,6 @@ const LogIn = () => {
 
     function handleCallbackResponse(response){
         const userObject = jwt_decode(response.credential);
-        console.log(userObject);
-        console.log(userObject.given_name);
         if(userObject.email === "salimfarhat@gmail.com"){
             setAdminSignedIn(true);
             setSignedIn(false);

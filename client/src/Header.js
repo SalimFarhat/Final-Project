@@ -27,6 +27,8 @@ const Header = () => {
         })
         .catch(err => console.log(err))
     }, [])
+
+    //The header loads all the workouts for the very specific purpose of finding out how many classes the client has attended and calculates what number to assign to them.
     
     if(allWorkOuts){
         allWorkOuts.forEach(element => {
